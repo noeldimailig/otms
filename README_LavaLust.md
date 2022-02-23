@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## LavaLust Version 2.0.5
 
     This is the continuous development using PHP 7.2 to 7.4+. This version is more stable compare to v2.1 which was only released for PHP 8.1 compatibility. V2.0+ will be the official release of Lavalust until further notice.
@@ -69,3 +70,6 @@
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
+=======
+# otms
+>>>>>>> c8dd28106564b2c25377608a1b2f80ed598d1e58
