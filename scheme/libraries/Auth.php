@@ -71,15 +71,13 @@ class Auth {
 	 * @param  string $usertype   Usertype
 	 * @return $this
 	 */
-	public function register($username, $password, $email, $usertype)
+	public function register($password, $email)
 	{
 		$bind = array(
-			'username' => $username,
 			'password' => $this->passwordhash($password),
 			'email' => $email,
-			'usertype' => $usertype,
 			);
-		return $this->LAVA->db->table('user')
+		return $this->LAVA->db->table('users')
 						->insert($bind)
 						->exec();
 	}
@@ -90,16 +88,16 @@ class Auth {
 	 * @param  string $password Password
 	 * @return string Validated Username
 	 */
-	public function login($username, $password)
+	public function login($email, $password)
 	{
-    	$row = $this->LAVA->db->table('user') 					
-    					->where('username', $username)
+    	$row = $this->LAVA->db->table('users') 					
+    					->where('email', $email)
     					->get();
 		if($row)
 		{
 			if(password_verify($password, $row['password']))
 			{
-				return $row['username'];
+				return $row;
 			} else {
 				return false;
 			}

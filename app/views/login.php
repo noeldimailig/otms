@@ -30,22 +30,22 @@
                         <div style="color: red;">
                             <?= $this->session->flashdata('error'); ?>
                         </div>
-                        <form action="<?= site_url('user/register'); ?>" method="post" data-hs-cf-bound="true">
+                        <form action="<?= site_url('user/signin'); ?>" method="post" data-hs-cf-bound="true">
                             <div class="position-relative form-group">
                                 <input name="email" placeholder="Email or Username" type="email" class="qa-test-login-username form-control-lg form-control" value="">
                             </div>
                             <div class="position-relative form-group">
                                 <input name="password" placeholder="Password" id="password" type="password" class="qa-test-login-password form-control-lg form-control" value="">
                             </div>
-                            <div class="position-relative form-group">
-                                <input name="confirm_password" placeholder="Repeat Password" id="confirm_password" type="password" class="qa-test-login-password form-control-lg form-control" value="">
+                            <div class="forgot-password-container text-center">
+                                <button type="button" class="qa-test-forgot-password-btn btn btn-link"><span>Forgot password?</span></button>
                             </div>
                             <div class="form-group">
-                                <input type="submit" id="qa-test-lightbox-login" class="btn btn-primary btn-lg btn-block" value="Sign Up">
+                                <input type="submit" id="qa-test-lightbox-login" class="btn btn-primary btn-lg btn-block" value="Log In">
                             </div>
                         </form>
                         <div class="signup-container text-center">
-                            <span class="qa-test-login-signup-link">Don't have an account? <a href="<?= site_url('user/login'); ?>"> Sign up </a></span>
+                            <span class="qa-test-login-signup-link">Don't have an account? <a href="<?= site_url('user/signup'); ?>"> Sign up </a></span>
                         </div>
                     </div>
                 </div>
