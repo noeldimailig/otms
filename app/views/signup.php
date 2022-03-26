@@ -22,10 +22,10 @@ include('config.php');
             </div>
             <div class="col-md-7">
                 <h1 class="mb-4">Sign Up</h1>
-                <h5 class="mt-2 mb-4"><span>Create your account. After creating your account, you can start joining a class together with your teachers and classmates.</span></h5>
+                <p class="mt-2 mb-4 fs-5"><span>Create your account. After creating your account, you can start joining a class together with your teachers and classmates.</span></p>
 
                 <a id="signin" class="col-12 bg-white btn btn-outline-secondary p-2" role="button" href="<?=$google_client->createAuthUrl()?>">
-                    <img width="20px" style="margin-bottom:3px; margin-right:10px" alt="Google sign-in" src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png'>
+                    <!-- <img width="20px" style="margin-bottom:3px; margin-right:10px" alt="Google sign-in" src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png'> -->
                     <span class="fa fa-google"></span> Sign up with Google
                 </a>
 
@@ -126,7 +126,7 @@ include('config.php');
                     </div>
                 </form>
                 <div class="signup-container text-center">
-                    <span>Don't have an account? <a href="<?= site_url('user/login'); ?>"> Sign in </a></span>
+                    <span>Already have an account? <a href="<?= site_url('user/login'); ?>"> Sign in </a></span>
                 </div>
             </div>
         </div>

@@ -25,7 +25,7 @@ include('config.php');
                 <h1 class="mb-4">Sign In</h1>
                 <h5 class="mb-4">Sign in to continue to our application</h5>
                 <a id="signin" class="col-12 btn btn-outline-secondary bg-white p-2" role="button" href="<?=$google_client->createAuthUrl()?>">
-                    <img width="20px" style="margin-bottom:3px; margin-right:10px" alt="Google sign-in" src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png'>
+                    <!-- <img width="20px" style="margin-bottom:3px; margin-right:10px" alt="Google sign-in" src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png'> -->
                     <span class="fa fa-google"></span> Sign in with Google
                 </a>
 
@@ -51,7 +51,7 @@ include('config.php');
                 </form>
 
                 <div class="signup-container text-center">
-                    <span class="qa-test-login-signup-link">Don't have an account? <a href="<?= site_url('user/signup'); ?>"> Sign up </a></span>
+                    <span class="qa-test-login-signup-link">Don't have an account? <a href="<?= site_url('user/choose'); ?>"> Sign up </a></span>
                 </div>
             </div>
         </div>

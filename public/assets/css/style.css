@@ -34,7 +34,8 @@ a:is(:link, :active, :visited).active {
 }
 
 #signin:hover {
-  background-color: #6c757d!important;
+  /* background-color: #6c757d!important; */
+  background-color: #DC3545!important;
   color: #fff;
 }
 
@@ -70,4 +71,10 @@ a:is(:link, :active, :visited).active {
   font-size: 12px;
   text-transform: uppercase;
   font-weight: 700;
+}
+
+.choose-account:hover {
+  background: #fff;
+  border: 1px solid #28a745!important;
+  color: #6c757d!important;
 }
