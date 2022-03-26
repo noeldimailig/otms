@@ -9,7 +9,7 @@ body {
   font-size: .875rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
+  color: #000;
   text-align: left;
   min-height: 100%;
 }
@@ -20,39 +20,37 @@ body, button, div, fieldset, form, h1, h2, h3, h4, h5, h6, html, input, label, l
   line-height: 20px;
 }
 
-.navbar {
-  padding: 0px; 
-  height: 65px; 
-  background-color: white; 
-  box-shadow: rgba(0, 0, 0, 0.07) 0px 2px 4px;
+a:is(:link, :active, :visited).active {
+  color: #343a40;
 }
 
-.fixed-bottom, .fixed-top {
-  position: fixed;
-  right: 0;
-  left: 0;
-  z-index: 1030;
+.navbar a {
+  color: #fff;
+  font-weight: bold;
 }
 
-.page-content {
-  width: 560px;
-  padding: 65px 42px 32px;
+.navbar a:hover {
+  color: #343a40;
 }
 
-.page-content h3 {
-  padding-top: 56px;
-  color: #1c1e27;
-  line-height: 32px;
+#signin:hover {
+  background-color: #6c757d!important;
+  color: #fff;
 }
 
-.page-content .signup-or-container {
+.signin-enabled {
+  background-color: #28a745!important;
+  color: #fff;
+}
+
+.signup-or-container {
   width: 100%;
   margin: 0 auto;
   position: relative;
   text-align: center;
 }
 
-.page-content .signup-or-container .signup-border {
+.signup-or-container .signup-border {
   border-top: 1px solid #ccced7;
   position: absolute;
   width: 100%;
@@ -62,7 +60,7 @@ body, button, div, fieldset, form, h1, h2, h3, h4, h5, h6, html, input, label, l
   left: 0;
 }
 
-.page-content .signup-or-container span {
+.signup-or-container span {
   display: inline-block;
   background: #fff;
   color: #ccced7;
@@ -72,39 +70,4 @@ body, button, div, fieldset, form, h1, h2, h3, h4, h5, h6, html, input, label, l
   font-size: 12px;
   text-transform: uppercase;
   font-weight: 700;
-}
-
-.page-content .login-options {
-  margin-top: 10px;
-}
-
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.position-relative {
-  position: relative!important;
-}
-
-.form-control-lg {
-  height: calc(2.875rem + 2px);
-  padding: .5rem 1rem;
-  font-size: 1.25rem;
-  line-height: 1.5;
-  border-radius: .3rem;
-}
-
-.form-control {
-  display: block;
-  width: 100%;
-  height: calc(2.0625rem + 2px);
-  padding: .375rem .75rem;
-  font-size: .875rem;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: .25rem;
-  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }

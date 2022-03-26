@@ -12,6 +12,10 @@ class User extends Controller {
 		$this->call->view('index');
 	}
 
+	public function choose_account() {
+		$this->call->view('choose_account');
+	}
+
 	public function login() {
 		$this->call->view('login');
 	}
@@ -24,7 +28,7 @@ class User extends Controller {
 
 		if($result){
 			$userdata = array(
-				'user_id' => $result['id'],
+				'main_id' => $result['main_id'],
 				'user_email' => $result['email'],
 			);
 
@@ -33,7 +37,7 @@ class User extends Controller {
 			redirect('user/index');
 		}else {
 			$this->session->set_flashdata(array('error' => 'Username or password do not match. Please try again.'));
-			$this->call->view('login');
+			redirect('user/login');
 		}
 	}
 
@@ -69,6 +73,18 @@ class User extends Controller {
 	}
 
 	public function logout() {
+		$google_client = new Google_Client();
+
+		$google_client->setClientId(GOOGLE_CLIENT_ID);
+
+		$google_client->setClientSecret(GOOGLE_CLIENT_SECRET);
+
+		$google_client->setRedirectUri(GOOGLE_REDIRECT_URL);
+
+		$google_client->addScope('email');
+		$google_client->addScope('profile');
+		$google_client->revokeToken();
+		
 		$userdata = array(
 			'user_id',
 			'user_email',

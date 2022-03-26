@@ -5,6 +5,7 @@
         }
     },
     "require": {
-        "cboden/ratchet": "^0.4.4"
+        "cboden/ratchet": "^0.4.4",
+        "google/apiclient": "^2.12"
     }
 }

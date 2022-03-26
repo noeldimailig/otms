@@ -77,6 +77,8 @@ define('ROOT_DIR',  dirname(__DIR__) . DIRECTORY_SEPARATOR);
 define('SYSTEM_DIR', ROOT_DIR . $system_path . DIRECTORY_SEPARATOR);
 define('APP_DIR', ROOT_DIR . $application_folder . DIRECTORY_SEPARATOR);
 define('PUBLIC_DIR', $public_folder);
+
+// Google API configuration
 define('GOOGLE_CLIENT_ID', '477730281256-qgr0i1jj2j4defvge950g4af4h45hi5r.apps.googleusercontent.com');
 define('GOOGLE_CLIENT_SECRET', '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');
 define('GOOGLE_REDIRECT_URL', 'http://localhost/otms/');
