@@ -9,6 +9,7 @@ include('config.php');
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/favicon.ico?v=2">
+    <title>Teacher Account</title>
     <?php include('header.php'); ?>
 </head>
 
@@ -17,12 +18,13 @@ include('config.php');
     <div class="container-fluid">
         <div class="row p-5 my-4 rounded-3">
             <div class="col-md-5 d-flex flex-column justify-content-center align-items-center">
-                <img style="width: 350px; height:auto;" src="<?= BASE_URL . PUBLIC_DIR . '/assets/img/signup.svg'; ?>" alt="">
+                <img style="width: 500px; height:auto;" src="<?= BASE_URL . PUBLIC_DIR . '/assets/img/teacher.svg'; ?>" alt="">
                 <h2 class="mt-3 fw-bold text-success">Thesis Project Management System</h2>
             </div>
             <div class="col-md-7">
-                <h1 class="mb-4">Sign Up</h1>
-                <p class="mt-2 mb-4 fs-5"><span>Create your account. After creating your account, you can start joining a class together with your teachers and classmates.</span></p>
+                <a class="fs-5" style="text-transform:none;" href="<?= site_url('user/choose'); ?>"><i class="fa-solid fa-arrow-left-long fa-lg text-dark"></i> Go Back</a>
+                <h2 class="mt-4 mb-4">Teacher Account</h2>
+                <p class="mt-2 mb-4 fs-6"><span>Create your account. After creating your account, you can start joining a class together with your teachers and classmates.</span></p>
 
                 <a id="signin" class="col-12 bg-white btn btn-outline-secondary p-2" role="button" href="<?=$google_client->createAuthUrl()?>">
                     <!-- <img width="20px" style="margin-bottom:3px; margin-right:10px" alt="Google sign-in" src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png'> -->
@@ -116,11 +118,34 @@ include('config.php');
                                 <option value="Other">Other</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-3 mb-3">
+                        <div class="form-group col-md-3 mb-2">
                             <label for="bdate" class="form-label mb-0">Birthdate</label>
                             <input type="date" class="form-control form-control-sm mb-0" name="bdate" id="bdate">
                         </div> 
-                    </div>         
+                    </div>  
+                    <div class="row">
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="designation" class="form-label mb-0">Designation</label>
+                            <select name="designation" id="designation" class="form-control form-control-sm mb-0">
+                                <option value="N/A" disabled>Select Designation</option>
+                                <option value="Instructor I">Instructor I</option>
+                                <option value="Instructor I">Instructor I</option>
+                                <option value="Instructor I">Instructor I</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="position" class="form-label mb-0">Position</label>
+                            <select name="position" id="position" class="form-control form-control-sm mb-0">
+                                <option value="N/A" disabled>Select Position</option>
+                                <option value="Student">Adviser</option>
+                                <option value="Faculty">Faculty</option>
+                                <option value="Program Chair">Program Chair</option>
+                                <option value="Dean">Dean</option>
+                                <option value="Research Coordinator">Research Coordinator</option>
+                                <option value="Research Office Staff">Research Office Staff</option>
+                            </select>
+                        </div>
+                    </div>        
                     <div class="form-group mb-3">
                         <input type="submit" id="submit" disabled class="btn btn-light btn-lg col-12" value="Sign Up">
                     </div>

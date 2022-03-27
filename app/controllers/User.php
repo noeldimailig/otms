@@ -16,6 +16,22 @@ class User extends Controller {
 		$this->call->view('choose_account');
 	}
 
+	public function student() {
+		$this->call->view('student_signup');
+	}
+
+	public function teacher() {
+		$this->call->view('teacher_signup');
+	}
+
+	public function staff() {
+		$this->call->view('staff_signup');
+	}
+
+	public function forgot() {
+		$this->call->view('forgot_password');
+	}
+
 	public function login() {
 		$this->call->view('login');
 	}
