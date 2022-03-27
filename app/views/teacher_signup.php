@@ -33,109 +33,99 @@ include('config.php');
 
                 <div class="signup-or-container mt-4 mb-4"><div class="signup-border"></div><span>or</span></div>
 
-                <div style="color: red;">
-                    <?= $this->session->flashdata('error'); ?>
-                </div>
-                <form action="<?= site_url('user/register'); ?>" method="post" data-hs-cf-bound="true">
+                <div id="message"></div>
+                <form id="signup-validate" class="needs-validation" action="<?= site_url('user/register'); ?>" method="post">
                     <div class="row">
-                        <div class="form-group col-md-4 mb-2">
+                        <div class="col-md-4 mb-2">
                             <label for="fname" class="form-label mb-0">First Name</label>
+                            <input type="hidden" class="form-control form-control-sm mb-0" name="user-type" id="user-type" value="Teacher">
                             <input type="text" class="form-control form-control-sm mb-0" name="fname" id="fname" placeholder="First Name" required>
                         </div>
-                        <div class="form-group col-md-2 mb-2">
+                        <div class="col-md-2 mb-2">
                             <label for="mname" class="form-label mb-0">Middle Name</label>
                             <input type="text" class="form-control form-control-sm mb-0" name="mname" id="mname" placeholder="Middle Name">
                         </div>
-                        <div class="form-group col-md-4 mb-2">
+                        <div class="col-md-4 mb-2">
                             <label for="lname" class="form-label mb-0">Last Name</label>
                             <input type="text" class="form-control form-control-sm mb-0" name="lname" id="lname" placeholder="Last Name" required>
                         </div>
-                        <div class="form-group col-md-2 mb-2">
+                        <div class="col-md-2 mb-2">
                             <label for="nameex" class="form-label mb-0">Name Ext.</label>
                             <select name="nameex" id="nameex" class="form-control form-control-sm mb-0">
                                 <option></option>
-                                <option>Jr.</option>
-                                <option>Sr.</option>
-                                <option>I</option>
-                                <option>II</option>
-                                <option>III</option>
+                                <option value="Jr.">Jr.</option>
+                                <option value="Sr.">Sr.</option>
+                                <option value="I">I</option>
+                                <option value="II">II</option>
+                                <option value="III">III</option>
+                                <option value="IV">IV</option>
                             </select>
                         </div>
                     </div>    
                     <div class="row">
-                        <div class="form-group col-md-6 mb-2">
+                        <div class="col-md-6 mb-2">
                             <label for="uname" class="form-label mb-0">Username</label>
                             <input type="text" class="form-control form-control-sm mb-0" name="uname" id="uname" placeholder="Username" required>
                         </div>
-                        <div class="form-group col-md-6 mb-2">
+                        <div class="col-md-6 mb-2">
                             <label for="email" class="form-label mb-0">Email</label>
                             <input type="email" class="form-control form-control-sm mb-0" name="email" id="email" placeholder="Email" required>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-6 mb-2">
-                            <label for="password" class="form-label mb-0">Password</label>
-                            <input name="password" placeholder="Password" id="password" type="password" class="form-control-sm form-control">
-                        </div>
-                        <div class="form-group col-md-6 mb-2">
-                            <label for="confirm_password" class="form-label mb-0">Confirm Password</label>
-                            <input name="confirm_password" placeholder="Repeat Password" id="confirm_password" type="password" class="form-control-sm form-control">
-                        </div>  
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-3 mb-2">
+                        <div class="col-sm-3 mb-2">
                             <label class="form-label">Address</label>
-                            <select name="region" class="form-control form-control-sm" id="region"></select>
-                            <input type="hidden" class="form-control form-control-sm" name="region_text" id="region-text" required>
+                            <select name="region" class="form-control form-control-sm" id="region" required></select>
+                            <input type="hidden" class="form-control form-control-sm" name="region_text" id="region-text">
                         </div>
-                        <div class="form-group col-sm-3 mb-2 province">
+                        <div class="col-sm-3 mb-2 province">
                             <label class="form-label">Province</label>
-                            <select name="province" class="form-control form-control-sm" id="province"></select>
-                            <input type="hidden" class="form-control form-control-sm" name="province_text" id="province-text" required>
+                            <select name="province" class="form-control form-control-sm" id="province" required></select>
+                            <input type="hidden" class="form-control form-control-sm" name="province_text" id="province-text">
                         </div>
-                        <div class="form-group col-sm-3 mb-2">
+                        <div class="col-sm-3 mb-2">
                             <label class="form-label">City / Municipality</label>
-                            <select name="city" class="form-control form-control-sm" id="city"></select>
-                            <input type="hidden" class="form-control form-control-sm" name="city_text" id="city-text" required>
+                            <select name="city" class="form-control form-control-sm" id="city" required></select>
+                            <input type="hidden" class="form-control form-control-sm" name="city_text" id="city-text">
                         </div>
-                        <div class="form-group col-sm-3 mb-2">
+                        <div class="col-sm-3 mb-2">
                             <label class="form-label">Barangay</label>
-                            <select name="barangay" class="form-control form-control-sm" id="barangay"></select>
-                            <input type="hidden" class="form-control form-control-sm" name="barangay_text" id="barangay-text" required>
+                            <select name="barangay" class="form-control form-control-sm" id="barangay" required></select>
+                            <input type="hidden" class="form-control form-control-sm" name="barangay_text" id="barangay-text">
                         </div>
                     </div>  
                     <div class="row">
-                        <div class="form-group col-md-6 mb-2">
+                        <div class="col-md-6 mb-2">
                             <label for="contact" class="form-label mb-0">Contact No.</label>
                             <input type="text" class="form-control form-control-sm mb-0" name="contact" id="contact" placeholder="Contact No." required>
                         </div> 
-                        <div class="form-group col-md-3 mb-2">
+                        <div class="col-md-3 mb-2">
                             <label for="gender" class="form-label mb-0">Gender</label>
-                            <select name="gender" id="gender" class="form-control form-control-sm mb-0">
+                            <select name="gender" id="gender" class="form-control form-control-sm mb-0" required>
                                 <option value="N/A">Select Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                                 <option value="Other">Other</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-3 mb-2">
+                        <div class="col-md-3 mb-2">
                             <label for="bdate" class="form-label mb-0">Birthdate</label>
-                            <input type="date" class="form-control form-control-sm mb-0" name="bdate" id="bdate">
+                            <input type="date" class="form-control form-control-sm mb-0" name="bdate" id="bdate" required>
                         </div> 
                     </div>  
                     <div class="row">
-                        <div class="form-group col-md-6 mb-3">
+                        <div class="col-md-6 mb-2">
                             <label for="designation" class="form-label mb-0">Designation</label>
-                            <select name="designation" id="designation" class="form-control form-control-sm mb-0">
+                            <select name="designation" id="designation" class="form-control form-control-sm mb-0" required>
                                 <option value="N/A" disabled>Select Designation</option>
                                 <option value="Instructor I">Instructor I</option>
                                 <option value="Instructor I">Instructor I</option>
                                 <option value="Instructor I">Instructor I</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-6 mb-3">
+                        <div class="col-md-6 mb-2">
                             <label for="position" class="form-label mb-0">Position</label>
-                            <select name="position" id="position" class="form-control form-control-sm mb-0">
+                            <select name="position" id="position" class="form-control form-control-sm mb-0" required>
                                 <option value="N/A" disabled>Select Position</option>
                                 <option value="Student">Adviser</option>
                                 <option value="Faculty">Faculty</option>
@@ -145,9 +135,25 @@ include('config.php');
                                 <option value="Research Office Staff">Research Office Staff</option>
                             </select>
                         </div>
-                    </div>        
-                    <div class="form-group mb-3">
-                        <input type="submit" id="submit" disabled class="btn btn-light btn-lg col-12" value="Sign Up">
+                    </div>   
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <label for="password" class="form-label mb-0">Password</label>
+                            <input name="password" placeholder="Password" id="password" type="password" class="form-control-sm form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label for="confirm_password" class="form-label mb-0">Confirm Password</label>
+                            <input name="confirm_password" placeholder="Repeat Password" id="confirm_password" type="password" class="form-control-sm form-control" required>
+                        </div>  
+                    </div> 
+                    <div class="col-md-12 mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="YES" id="CONSENT" name="CONSENT" onchange="consent();" required>
+                            <label class="form-check-label" for="consent" style="color: blue">I agree to terms and conditions</label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <input type="submit" id="submit" class="btn btn-success btn-lg col-12" disabled value="Sign Up">
                     </div>
                 </form>
                 <div class="signup-container text-center">

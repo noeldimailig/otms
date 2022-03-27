@@ -12,14 +12,30 @@ class User_model extends Model {
         return $this->db->last_id();
     }
 
-	public function insert($email, $pass) {
-        $data = [
-            'password' => $pass,
-            'email' => $email,
+	public function check_email($email) {
+        $result = $this->db->table('users')->select('email')->where('email', $email)->get();
+        if($result) return true;
+    }
+
+    public function verify($email, $token) {
+        $condition = [
+            'u.email' => $email,
+            'u.token' => $token
         ];
 
-        $result = $this->db->table('users')->insert($data)->exec();
-        if($result) return true;
+        $result = $this->db->table('users as u')
+                 ->select('u.user_id, u.username, u.fname, u.lname, u.profile, u.email, u.user_type')
+                 ->where($condition)
+                 ->get();
+
+        $status = ['status' => 1];
+        if($result){
+            $verify = $this->db->table('users as u')->update($status)->where($condition)->exec();
+            if($verify)
+                return $result;
+            else
+                return false;    
+        }
     }
 }
 ?>

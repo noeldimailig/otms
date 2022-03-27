@@ -17,6 +17,8 @@ if(!isset($_SESSION['main_id'])){
             $_SESSION['user_image'] = $data['picture'];
             $_SESSION['user_gender'] = $data['gender'];
             $_SESSION['user_status'] = $data['verifiedEmail'];
+            $_SESSION['user_gid'] = $data['id'];
+            $_SESSION['user_data'] = $data;
         } else {
             redirect('user/login');
         }
@@ -43,10 +45,9 @@ if(!isset($_SESSION['main_id'])){
         <div class="panel panel-default">
             <div class="panel-heading">Welcome User</div>
             <div class="panel-body">
-                <!-- <img src="<?php //$_SESSION['user_image']?>" class="img-responsive img-circle img-thumbnail" /> -->
-                <!-- <h3><b>Name :</b><?php //$_SESSION['user_fname']?> <?php //$_SESSION['user_lname']?></h3> -->
-                <h3><b>UserID :</b> <?=$_SESSION['main_id']?> </h3>
+                <h3><b>UserID :</b> <?php if(!isset($_SESSION['main_id'])) echo $_SESSION['user_gid']; else echo $_SESSION['main_id'];?> </h3>
                 <h3><b>Email :</b> <?=$_SESSION['user_email']?> </h3>
+                <h3><b>User Data :</b> <?php if(isset($_SESSION['user_data'])) var_dump($_SESSION['user_data']); ?> </h3>
                 <!-- <h3><b>Status :</b> <?php //$_SESSION['user_status']?> </h3> -->
             </div>
         </div>

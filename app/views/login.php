@@ -43,7 +43,8 @@ include('config.php');
                     <div class="form-group col-12 mb-3">
                         <input name="password" placeholder="Password" id="password" type="password" class="form-control-lg form-control">
                     </div>
-                    <div class="text-center mb-3">
+                    <div class="text-center mb-3 d-flex align-items-between justify-content-between fs-6">
+                        <a class="btn btn-link" href="<?= site_url('user/verify'); ?>"><span>Verify Account</span></a>
                         <a class="btn btn-link" href="<?= site_url('user/forgot'); ?>"><span>Forgot password?</span></a>
                     </div>
                     <div class="form-group col-12 mb-3">

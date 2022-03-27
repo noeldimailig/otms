@@ -12,7 +12,7 @@
             </div>
             <div class="navbar-nav ms-auto">              	
                 <a href="<?= site_url('user/login'); ?>" class="nav-item nav-link">Login</a>
-                <a href="<?= site_url('user/signup'); ?>" class="nav-item nav-link">Register</a>
+                <a href="<?= site_url('user/choose'); ?>" class="nav-item nav-link">Register</a>
             </div>
         </div>
     </div>

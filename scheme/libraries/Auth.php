@@ -71,11 +71,25 @@ class Auth {
 	 * @param  string $usertype   Usertype
 	 * @return $this
 	 */
-	public function register($password, $email)
+	public function register($type, $fname, $mname = "", $lname, $nameex = "", $uname, $email, $address, $contact, $gender, $bdate, $designation, $position, $password, $token)
 	{
 		$bind = array(
-			'password' => $this->passwordhash($password),
+			'user_type' => $type,
+			'fname' => $fname,
+			'mname' => $mname,
+			'lname' => $lname,
+			'name_ex' => $nameex,
+			'username' => $uname,
 			'email' => $email,
+			'address' => $address,
+			'contact' => $contact,
+			'gender' => $gender,
+			'bdate' => $bdate,
+			'designation' => $designation,
+			'position' => $position,
+			'email' => $email,
+			'password' => $this->passwordhash($password),
+			'token' => $token
 			);
 		return $this->LAVA->db->table('users')
 						->insert($bind)

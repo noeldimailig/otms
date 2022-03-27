@@ -64,27 +64,101 @@ class User extends Controller {
 	public function register() {
 		$this->call->model('User_model');
 
+		$type = $this->io->post('user-type');
+		$fname = $this->io->post('fname');
+		$mname = $this->io->post('mname');
+		$lname = $this->io->post('lname');
+		$nameex = $this->io->post('nameex');
+		$uname = $this->io->post('uname');
 		$email = $this->io->post('email');
+		$region = $this->io->post('region');
+		$province = $this->io->post('province');
+		$city = $this->io->post('city');
+		$barangay = $this->io->post('barangay');
+		$contact = $this->io->post('contact');
+		$gender = $this->io->post('gender');
+		$bdate = $this->io->post('bdate');
+		$designation = $this->io->post('designation');
+		$position = $this->io->post('position');
 		$password = $this->io->post('password');
 		$confirm = $this->io->post('confirm_password');
+		
+		$address = $region . ',' . $province . ',' . $city . ',' . $barangay;
 
 		$hash = $this->auth->passwordhash($password);
 
+		$token = mt_rand(11111, 99999);
+
+		if($this->User_model->check_email($email)){
+			$msg['msg'] = "Email already exists! Try using other email.";
+			$msg['error'] = true;
+			echo json_encode($msg);
+			exit;
+		}
 		if(password_verify($confirm, $hash) == true){
-			$this->auth->register($email, $password);
-			$this->auth->set_logged_in($email);
+			$result = $this->auth->register($type, $fname, $mname, $lname, $nameex, $uname, $email, $address, $contact, $gender, $bdate, $designation, $position, $password, $token);
+			
+			if($result){
+				$this->auth->set_logged_in($email);
 
-			$id = $this->User_model->get_last_id();
+				$id = $this->User_model->get_last_id();
 
+				$userdata = array(
+					'user_id' => $id,
+					'user_email' => $email,
+					'firstname' => $fname,
+					'lastname' => $lname,
+					'user_profile' => 'profile.png',
+					'user_role' => $type
+				);
+				$this->session->set_userdata($userdata);
+				$this->send_code($email, $token);
+				$msg['msg'] = "Account creation successful. Verify your account using the verification code sent to your email.";
+				$msg['error'] = false;
+				$msg['role'] = $type;
+				echo json_encode($msg);
+				exit;
+			}else{
+				$msg['msg'] = "Account creation failed. Please check all the information you provided!";
+				$msg['error'] = true;
+				echo json_encode($msg);
+				exit;
+			}
+		}
+	}
+
+	public function verify() {
+		$this->call->view('verify');
+	}
+
+	public function verify_account() {
+		$this->call->model('User_model');
+
+		$email = $this->io->post('email');
+		$token = $this->io->post('token');
+
+		$result = $this->User_model->verify($email, $token);
+
+		if($result){
 			$userdata = array(
-				'user_id' => $id,
-				'user_email' => $email
+				'user_id' => $result['user_id'],
+				'username' => $result['username'],
+				'firstname' => $result['fname'],
+				'lastname' => $result['lname'],
+				'user_profile' => $result['profile'],
+				'user_role' => $result['user_type'],
+				'user_email' => $result['email'],
 			);
+
 			$this->session->set_userdata($userdata);
-			redirect('user/index');
+			$this->auth->set_logged_in($result['email']);
+			$msg['msg'] = "Verification successful, please proceed to logging your account.";
+			$msg['error'] = false;
+			echo json_encode($msg);
 		}else {
-			$this->session->set_flashdata(array('error' => 'Password do not match!!'));
-			$this->call->view('signup');
+			$msg['msg'] = "Something went wrong, please try to check the email or code you entered.";
+			$msg['error'] = true;
+			echo json_encode($msg);
 		}
 	}
 
@@ -110,6 +184,15 @@ class User extends Controller {
 		$this->auth->set_logged_out();
 
 		redirect('user/login');
-	}	
+	}
+	
+	public function send_code($email, $token) {
+		$content = "You sign up in our website. Please verify your account in order to login!\nUse this code " . $token . " to verify your account.";
+		$this->email->subject('Account Validation');
+		$this->email->sender('otmsminsu@gmail.com');
+		$this->email->recipient($email);
+		$this->email->email_content($content);
+		$this->email->send();
+	}
 }
 ?>

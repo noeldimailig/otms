@@ -32,7 +32,7 @@ include('config.php');
                             </div>                        
                             <div class="col-md-10 d-flex flex-column align-items-start justify-content-start">
                                 <h5 class="mb-2">I'm a Teacher</h5>
-                                <p class="fs-6">For teachers, co-teachers</p>
+                                <p class="fs-6">For teachers, advisers</p>
                             </div>
                         </div>
                     </a>
@@ -53,7 +53,7 @@ include('config.php');
                                 <i class="fa-solid fa-user-tie fa-2x text-success"></i>    
                             </div>                        
                             <div class="col-md-10 d-flex flex-column align-items-start justify-content-start">
-                                <h5 class="mb-2">I'm R&D Staff</h5
+                                <h5 class="mb-2">I'm R&D Staff</h5>
                                 <p class="fs-6">For research and development office staffs</p>
                             </div>
                         </div>

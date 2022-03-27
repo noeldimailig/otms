@@ -24,7 +24,7 @@ include('config.php');
             <div class="col-md-7">
                 <a class="fs-5" style="text-transform:none;" href="<?= site_url('user/choose'); ?>"><i class="fa-solid fa-arrow-left-long fa-lg text-dark"></i> Go Back</a>
                 <h2 class="mt-4 mb-4">Student Account</h2>
-                <p class="mt-2 mb-4 fs-5"><span>Create your account. After creating your account, you can start joining a class together with your teachers and classmates.</span></p>
+                <p class="mt-2 mb-4 fs-6"><span>Create your account. After creating your account, you can start joining a class together with your teachers and classmates.</span></p>
 
                 <a id="signin" class="col-12 bg-white btn btn-outline-secondary p-2" role="button" href="<?=$google_client->createAuthUrl()?>">
                     <!-- <img width="20px" style="margin-bottom:3px; margin-right:10px" alt="Google sign-in" src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png'> -->
@@ -36,7 +36,7 @@ include('config.php');
                 <div style="color: red;">
                     <?= $this->session->flashdata('error'); ?>
                 </div>
-                <form action="<?= site_url('user/register'); ?>" method="post" data-hs-cf-bound="true">
+                <form id="signup-validate" action="<?= site_url('user/register'); ?>" method="post" data-hs-cf-bound="true">
                     <div class="row">
                         <div class="form-group col-md-4 mb-2">
                             <label for="fname" class="form-label mb-0">First Name</label>
@@ -54,11 +54,12 @@ include('config.php');
                             <label for="nameex" class="form-label mb-0">Name Ext.</label>
                             <select name="nameex" id="nameex" class="form-control form-control-sm mb-0">
                                 <option></option>
-                                <option>Jr.</option>
-                                <option>Sr.</option>
-                                <option>I</option>
-                                <option>II</option>
-                                <option>III</option>
+                                <option value="Jr.">Jr.</option>
+                                <option value="Sr.">Sr.</option>
+                                <option value="I">I</option>
+                                <option value="II">II</option>
+                                <option value="III">III</option>
+                                <option value="IV">IV</option>
                             </select>
                         </div>
                     </div>    
@@ -71,16 +72,6 @@ include('config.php');
                             <label for="email" class="form-label mb-0">Email</label>
                             <input type="email" class="form-control form-control-sm mb-0" name="email" id="email" placeholder="Email" required>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6 mb-2">
-                            <label for="password" class="form-label mb-0">Password</label>
-                            <input name="password" placeholder="Password" id="password" type="password" class="form-control-sm form-control">
-                        </div>
-                        <div class="form-group col-md-6 mb-2">
-                            <label for="confirm_password" class="form-label mb-0">Confirm Password</label>
-                            <input name="confirm_password" placeholder="Repeat Password" id="confirm_password" type="password" class="form-control-sm form-control">
-                        </div>  
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-3 mb-2">
@@ -122,9 +113,48 @@ include('config.php');
                             <label for="bdate" class="form-label mb-0">Birthdate</label>
                             <input type="date" class="form-control form-control-sm mb-0" name="bdate" id="bdate">
                         </div> 
-                    </div>         
+                    </div>  
+                    <!-- <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <label for="designation" class="form-label mb-0">Designation</label>
+                            <select name="designation" id="designation" class="form-control form-control-sm mb-0" required>
+                                <option value="N/A" disabled>Select Designation</option>
+                                <option value="Instructor I">Instructor I</option>
+                                <option value="Instructor I">Instructor I</option>
+                                <option value="Instructor I">Instructor I</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label for="position" class="form-label mb-0">Position</label>
+                            <select name="position" id="position" class="form-control form-control-sm mb-0" required>
+                                <option value="N/A" disabled>Select Position</option>
+                                <option value="Student">Adviser</option>
+                                <option value="Faculty">Faculty</option>
+                                <option value="Program Chair">Program Chair</option>
+                                <option value="Dean">Dean</option>
+                                <option value="Research Coordinator">Research Coordinator</option>
+                                <option value="Research Office Staff">Research Office Staff</option>
+                            </select>
+                        </div>
+                    </div>         -->
+                    <div class="row">
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="password" class="form-label mb-0">Password</label>
+                            <input name="password" placeholder="Password" id="password" type="password" class="form-control-sm form-control">
+                        </div>
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="confirm_password" class="form-label mb-0">Confirm Password</label>
+                            <input name="confirm_password" placeholder="Repeat Password" id="confirm_password" type="password" class="form-control-sm form-control">
+                        </div>  
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="YES" id="CONSENT" name="CONSENT" onchange="consent();" required>
+                            <label class="form-check-label" for="consent" style="color: blue">I agree to terms and conditions</label>
+                        </div>
+                    </div>
                     <div class="form-group mb-3">
-                        <input type="submit" id="submit" disabled class="btn btn-light btn-lg col-12" value="Sign Up">
+                        <input type="submit" id="submit" disabled class="btn btn-success btn-lg col-12" value="Sign Up">
                     </div>
                 </form>
                 <div class="signup-container text-center">

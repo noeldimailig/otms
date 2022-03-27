@@ -54,11 +54,12 @@ include('config.php');
                             <label for="nameex" class="form-label mb-0">Name Ext.</label>
                             <select name="nameex" id="nameex" class="form-control form-control-sm mb-0">
                                 <option></option>
-                                <option>Jr.</option>
-                                <option>Sr.</option>
-                                <option>I</option>
-                                <option>II</option>
-                                <option>III</option>
+                                <option value="Jr.">Jr.</option>
+                                <option value="Sr.">Sr.</option>
+                                <option value="I">I</option>
+                                <option value="II">II</option>
+                                <option value="III">III</option>
+                                <option value="IV">IV</option>
                             </select>
                         </div>
                     </div>    
