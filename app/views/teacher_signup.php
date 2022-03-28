@@ -29,6 +29,8 @@ include('config.php');
                 <a id="signin" class="col-12 bg-white btn btn-outline-secondary p-2" role="button" href="<?=$google_client->createAuthUrl()?>">
                     <!-- <img width="20px" style="margin-bottom:3px; margin-right:10px" alt="Google sign-in" src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png'> -->
                     <span class="fa fa-google"></span> Sign up with Google
+                    <?php $_SESSION['user_type'] = "faculty"; ?>
+                    <?php $_SESSION['user_activity'] = "signup"; ?>
                 </a>
 
                 <div class="signup-or-container mt-4 mb-4"><div class="signup-border"></div><span>or</span></div>
@@ -119,8 +121,8 @@ include('config.php');
                             <select name="designation" id="designation" class="form-control form-control-sm mb-0" required>
                                 <option value="N/A" disabled>Select Designation</option>
                                 <option value="Instructor I">Instructor I</option>
-                                <option value="Instructor I">Instructor I</option>
-                                <option value="Instructor I">Instructor I</option>
+                                <option value="Instructor II">Instructor II</option>
+                                <option value="Instructor III">Instructor III</option>
                             </select>
                         </div>
                         <div class="col-md-6 mb-2">
@@ -131,8 +133,6 @@ include('config.php');
                                 <option value="Faculty">Faculty</option>
                                 <option value="Program Chair">Program Chair</option>
                                 <option value="Dean">Dean</option>
-                                <option value="Research Coordinator">Research Coordinator</option>
-                                <option value="Research Office Staff">Research Office Staff</option>
                             </select>
                         </div>
                     </div>   

@@ -104,8 +104,13 @@ class Auth {
 	 */
 	public function login($email, $password)
 	{
-    	$row = $this->LAVA->db->table('users') 					
-    					->where('email', $email)
+    	$condition = [
+			'email' => $email,
+			'status' => 1
+		];
+    	$row = $this->LAVA->db->table('users')
+						->select('user_id, profile, fname, lname, username, user_type, email, password')					
+    					->where($condition)
     					->get();
 		if($row)
 		{

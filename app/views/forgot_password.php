@@ -25,22 +25,21 @@ include('config.php');
             <div class="col-md-6">
                 <h1 class="mb-4 mt-5">Forgot Password</h1>
                 <p class="fs-6 mb-4">Enter your email and new password and we'll send you verification code to reset your password.</p>
-                <div style="color: red;">
-                    <?= $this->session->flashdata('error'); ?>
-                </div>
+                
+                <div id="message"></div>
 
-                <form action="<?= site_url('user/signin'); ?>" method="post" data-hs-cf-bound="true">
+                <form id="forgot-validate" class="needs-validation" action="<?= site_url('user/forgot_password'); ?>" method="post">
                     <div class="form-group col-md-12 mb-3">
-                        <input name="email" placeholder="Email" id="email" type="email" class="form-control-lg form-control">
+                        <input name="email" placeholder="Email" id="email" type="email" class="form-control-lg form-control" required>
                     </div>
                     <div class="form-group col-md-12 mb-3">
-                        <input name="password" placeholder="Password" id="password" type="password" class="form-control-lg form-control">
+                        <input name="password" placeholder="Password" id="password" type="password" class="form-control-lg form-control" required>
                     </div>
                     <div class="form-group col-md-12 mb-3">
-                        <input name="confirm_password" placeholder="Confirm Password" id="confirm_password" type="password" class="form-control-lg form-control">
+                        <input name="confirm_password" placeholder="Confirm Password" id="confirm_password" type="password" class="form-control-lg form-control" required>
                     </div>
                     <div class="form-group col-md-12 mb-4">
-                        <input type="submit" id="submit" class="btn btn-lg col-12 btn-light" value="Send">
+                        <input type="submit" id="submit" class="btn btn-lg col-12 btn-success" value="Send">
                     </div>
                 </form>
 
@@ -52,6 +51,7 @@ include('config.php');
         </div>
     </div>
     <?php include('footer.php'); ?>
+    <?= load_js(array('assets/js/validate')); ?>
 </body>
 
 </html>

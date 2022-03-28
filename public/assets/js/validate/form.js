@@ -103,6 +103,46 @@ $().ready(function() {
         }
     });
 
+    /* Signin */
+    $("#forgot-validate").validate({
+        rules: {
+            email: {
+                required: true,
+                maxlength: 100,
+                email: true
+            },
+            password: {
+                required: true,
+                maxlength: 100,
+                minlength: 8,
+            },
+            confirm_password: {
+                required: true,
+                maxlength: 100,
+                minlength: 8,
+                equalTo: "#password"
+            },
+        },
+        messages: {
+            email: {
+                required: "This field is required.",
+                maxlength: "You have reach the maximum input value.",
+                email: "Please input a valid email."
+            },
+            password: {
+                required: "This field is required.",
+                maxlength: "You have reach the maximum input value.",
+                minlength: "Please enter at least 8 characters.",
+            },
+            confirm_password: {
+                required: "This field is required.",
+                maxlength: "You have reach the maximum input value.",
+                minlength: "Please enter at least 8 characters.",
+                equalTo: "Password do not match."
+            }
+        }
+    });
+
     /* Add Student */
     $("#signup-validate").validate({
         rules: {
@@ -264,12 +304,6 @@ $('#signup-validate').submit(function(e) {
                   $('#message-content').remove();
                   $('#message').hide();
                   location.replace('http://localhost/otms/user/verify');
-                //   if(res.role == "Teacher")
-                //     location.replace('http://localhost/otms/faculty/index');
-                //   else if(res.role == "Staff")
-                //     location.replace('"http://localhost/otms/staff/index');
-                //   else
-                //     location.replace('http://localhost/otms/student/index');
                 }, 6000);
                 var today = moment().format('YYYY-MM-DD');
                 $('#fname').val("");
@@ -317,9 +351,81 @@ $('#verify-validate').submit(function(e) {
                 $('#message').hide();
 
                 location.replace('http://localhost/otms/user/login');
-            }, 3000);
+            }, 5000);
             $('#verify_email').val("");
             $('#verify_code').val("");
+            } else {
+            $('#message').show();
+            alertError(res.msg);
+            setTimeout(function(){
+                $('#message-content').remove();
+                $('#message').hide();
+            }, 3000);
+            }
+        }
+    });
+});
+
+$('#forgot-validate').submit(function(e) {
+    e.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: form.serialize(),
+        success: function(response) {
+            var res = JSON.parse(response);
+            if(res.error == false) {
+            $('#message').show();
+            alertSuccess(res.msg);
+            setTimeout(function(){
+                $('#message-content').remove();
+                $('#message').hide();
+
+                location.replace('http://localhost/otms/user/verify');
+            }, 5000);
+            $('#email').val("");
+            $('#password').val("");
+            $('#confirm_password').val("");
+            } else {
+            $('#message').show();
+            alertError(res.msg);
+            setTimeout(function(){
+                $('#message-content').remove();
+                $('#message').hide();
+            }, 3000);
+            }
+        }
+    });
+});
+
+$('#signin-validate').submit(function(e) {
+    e.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: form.serialize(),
+        success: function(response) {
+            var res = JSON.parse(response);
+            if(res.error == false) {
+            $('#message').show();
+            alertSuccess(res.msg);
+            setTimeout(function(){
+                $('#message-content').remove();
+                $('#message').hide();
+
+                if(res.role == "Teacher")
+                location.replace('http://localhost/otms/faculty/index');
+                else if(res.role == "Staff")
+                location.replace('http://localhost/otms/staff/index');
+                else
+                location.replace('http://localhost/otms/student/index');
+            }, 5000);
+            $('#email').val("");
+            $('#password').val("");
             } else {
             $('#message').show();
             alertError(res.msg);

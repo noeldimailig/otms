@@ -29,17 +29,18 @@ include('config.php');
                 <a id="signin" class="col-12 bg-white btn btn-outline-secondary p-2" role="button" href="<?=$google_client->createAuthUrl()?>">
                     <!-- <img width="20px" style="margin-bottom:3px; margin-right:10px" alt="Google sign-in" src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png'> -->
                     <span class="fa fa-google"></span> Sign up with Google
+                    <?php $_SESSION['user_type'] = "student"; ?>
+                    <?php $_SESSION['user_activity'] = "signup"; ?>
                 </a>
 
                 <div class="signup-or-container mt-4 mb-4"><div class="signup-border"></div><span>or</span></div>
 
-                <div style="color: red;">
-                    <?= $this->session->flashdata('error'); ?>
-                </div>
-                <form id="signup-validate" action="<?= site_url('user/register'); ?>" method="post" data-hs-cf-bound="true">
+                <div id="message"></div>
+                <form id="signup-validate" class="needs-validation" action="<?= site_url('user/register'); ?>" method="post" data-hs-cf-bound="true">
                     <div class="row">
                         <div class="form-group col-md-4 mb-2">
                             <label for="fname" class="form-label mb-0">First Name</label>
+                            <input type="hidden" class="form-control form-control-sm mb-0" name="user-type" id="user-type" value="Student">
                             <input type="text" class="form-control form-control-sm mb-0" name="fname" id="fname" placeholder="First Name" required>
                         </div>
                         <div class="form-group col-md-2 mb-2">
@@ -114,29 +115,8 @@ include('config.php');
                             <input type="date" class="form-control form-control-sm mb-0" name="bdate" id="bdate">
                         </div> 
                     </div>  
-                    <!-- <div class="row">
-                        <div class="col-md-6 mb-2">
-                            <label for="designation" class="form-label mb-0">Designation</label>
-                            <select name="designation" id="designation" class="form-control form-control-sm mb-0" required>
-                                <option value="N/A" disabled>Select Designation</option>
-                                <option value="Instructor I">Instructor I</option>
-                                <option value="Instructor I">Instructor I</option>
-                                <option value="Instructor I">Instructor I</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 mb-2">
-                            <label for="position" class="form-label mb-0">Position</label>
-                            <select name="position" id="position" class="form-control form-control-sm mb-0" required>
-                                <option value="N/A" disabled>Select Position</option>
-                                <option value="Student">Adviser</option>
-                                <option value="Faculty">Faculty</option>
-                                <option value="Program Chair">Program Chair</option>
-                                <option value="Dean">Dean</option>
-                                <option value="Research Coordinator">Research Coordinator</option>
-                                <option value="Research Office Staff">Research Office Staff</option>
-                            </select>
-                        </div>
-                    </div>         -->
+                    <input type="hidden" class="form-control form-control-sm mb-0" name="designation" id="designation" value="Student">
+                    <input type="hidden" class="form-control form-control-sm mb-0" name="position" id="position" value="Student">
                     <div class="row">
                         <div class="form-group col-md-6 mb-3">
                             <label for="password" class="form-label mb-0">Password</label>

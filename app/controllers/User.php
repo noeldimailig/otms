@@ -44,16 +44,46 @@ class User extends Controller {
 
 		if($result){
 			$userdata = array(
-				'main_id' => $result['main_id'],
+				'user_id' => $result['user_id'],
+				'username' => $result['username'],
+				'fname' => $result['fname'],
+				'lname' => $result['lname'],
+				'user_profile' => $result['profile'],
+				'user_role' => $result['user_type'],
 				'user_email' => $result['email'],
 			);
 
-			$this->session->set_userdata($userdata);
-			$this->auth->set_logged_in($result['email']);
-			redirect('user/index');
+			$type = $result['user_type'];
+			if($type == "Teacher"){
+				$this->session->set_userdata($userdata);
+				$msg['msg'] = "Logged in successful.";
+				$msg['error'] = false;
+				$msg['role'] = $type;
+				echo json_encode($msg);
+				exit;
+			}
+			elseif($type == "Staff"){
+				$this->session->set_userdata($userdata);
+				$msg['msg'] = "Logged in successful.";
+				$msg['error'] = false;
+				$msg['role'] = $type;
+				echo json_encode($msg);
+				exit;
+			}else {
+				$this->session->set_userdata($userdata);
+				$this->auth->set_logged_in($result['username']);
+				$msg['msg'] = "Logged in successful.";
+				$msg['error'] = false;
+				$msg['role'] = $type;
+				echo json_encode($msg);
+				exit;
+			}
+			
 		}else {
-			$this->session->set_flashdata(array('error' => 'Username or password do not match. Please try again.'));
-			redirect('user/login');
+			$msg['msg'] = "Something went wrong, please try to check the email or password you entered.";
+			$msg['error'] = true;
+			echo json_encode($msg);
+			exit;
 		}
 	}
 
@@ -140,23 +170,34 @@ class User extends Controller {
 		$result = $this->User_model->verify($email, $token);
 
 		if($result){
-			$userdata = array(
-				'user_id' => $result['user_id'],
-				'username' => $result['username'],
-				'firstname' => $result['fname'],
-				'lastname' => $result['lname'],
-				'user_profile' => $result['profile'],
-				'user_role' => $result['user_type'],
-				'user_email' => $result['email'],
-			);
-
-			$this->session->set_userdata($userdata);
-			$this->auth->set_logged_in($result['email']);
 			$msg['msg'] = "Verification successful, please proceed to logging your account.";
 			$msg['error'] = false;
 			echo json_encode($msg);
 		}else {
 			$msg['msg'] = "Something went wrong, please try to check the email or code you entered.";
+			$msg['error'] = true;
+			echo json_encode($msg);
+		}
+	}
+
+	public function forgot_password() {
+		$this->call->model('User_model');
+
+		$email = $this->io->post('email');
+		$pass = $this->io->post('password');
+
+		$hash = $this->auth->passwordhash($pass);
+		$code = mt_rand(11111, 99999);
+
+		$result = $this->User_model->forgot($email, $hash, $code);
+
+		if($result){
+			$this->send_code($email, $code);
+			$msg['msg'] = "Password successfully changed, please proceed to verifying your account.";
+			$msg['error'] = false;
+			echo json_encode($msg);
+		} else {
+			$msg['msg'] = "Something went wrong, please try to check the email you entered.";
 			$msg['error'] = true;
 			echo json_encode($msg);
 		}
@@ -193,6 +234,41 @@ class User extends Controller {
 		$this->email->recipient($email);
 		$this->email->email_content($content);
 		$this->email->send();
+	}
+
+	public function google() {
+		$this->call->model('User_model');
+
+		$google_id = $_SESSION['user_gid'];
+		$type = $_SESSION['user_type'];
+		$profile = $_SESSION['user_profile'];
+		$lname = $_SESSION['user_lname'];
+		$fname = $_SESSION['user_fname'];
+		$email = $_SESSION['user_email'];
+		$status = $_SESSION['user_status'];
+		$token = mt_rand(11111, 99999);
+
+		$result = $this->User_model->check_email($_SESSION['user_email']);
+
+		if(!$result){
+			if(isset($_SESSION['user_activity']) && isset($_SESSION['user_type'])){
+				$signup = $this->User_model->google_signup($google_id, $type, $profile, $lname, $fname, $email, $token, $status);
+				if($signup){
+					redirect($_SESSION['user_type'].'/index');
+				}else {
+					redirect('user/choose');
+				}
+			}
+		} else{
+			if(isset($_SESSION['user_activity'])){	
+				$signin = $this->User_model->google_signin($google_id, $email, $status);
+				if($signin){
+					redirect($signin['user_type'].'/index');
+				}else {
+					redirect('user/login');
+				}
+			}
+		}
 	}
 }
 ?>

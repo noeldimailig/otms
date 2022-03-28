@@ -28,15 +28,14 @@ include('config.php');
                 <a id="signin" class="col-12 btn btn-outline-secondary bg-white p-2" role="button" href="<?=$google_client->createAuthUrl()?>">
                     <!-- <img width="20px" style="margin-bottom:3px; margin-right:10px" alt="Google sign-in" src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png'> -->
                     <span class="fa fa-google"></span> Sign in with Google
+                    <?php $_SESSION['user_activity'] = "signin"; ?>
                 </a>
 
                 <div class="signup-or-container mt-4 mb-4"><div class="signup-border"></div><span>or</span></div>
 
-                <div style="color: red;">
-                    <?= $this->session->flashdata('error'); ?>
-                </div>
+                <div id="message"></div>
 
-                <form action="<?= site_url('user/signin'); ?>" method="post" data-hs-cf-bound="true">
+                <form id="signin-validate" class="needs-validation" action="<?= site_url('user/signin'); ?>" method="post" data-hs-cf-bound="true">
                     <div class="form-group col-12 mb-3">
                         <input name="email" placeholder="Email" id="email" type="email" class="form-control-lg form-control">
                     </div>
@@ -48,7 +47,7 @@ include('config.php');
                         <a class="btn btn-link" href="<?= site_url('user/forgot'); ?>"><span>Forgot password?</span></a>
                     </div>
                     <div class="form-group col-12 mb-3">
-                        <input type="submit" id="submit" class="btn btn-lg col-12 btn-light" value="Log In">
+                        <input type="submit" id="submit" class="btn btn-lg col-12 btn-success" value="Log In">
                     </div>
                 </form>
 
@@ -59,6 +58,7 @@ include('config.php');
         </div>
     </div>
     <?php include('footer.php'); ?>
+    <?= load_js(array('assets/js/validate')); ?>
 </body>
 
 </html>

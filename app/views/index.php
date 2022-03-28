@@ -14,11 +14,11 @@ if(!isset($_SESSION['main_id'])){
             $_SESSION['user_email'] = $data['email'];
             $_SESSION['user_fname'] = $data['given_name'];
             $_SESSION['user_lname'] = $data['family_name'];
-            $_SESSION['user_image'] = $data['picture'];
+            $_SESSION['user_profile'] = $data['picture'];
             $_SESSION['user_gender'] = $data['gender'];
             $_SESSION['user_status'] = $data['verifiedEmail'];
             $_SESSION['user_gid'] = $data['id'];
-            $_SESSION['user_data'] = $data;
+            $_SESSION['data'] = $data;
         } else {
             redirect('user/login');
         }
@@ -31,26 +31,29 @@ if(!isset($_SESSION['main_id'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTMS</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
-    <?= load_css(array('assets/css/style')); ?>
+    <title>Allow Access</title>
+    <?php include('header.php'); ?>
 </head>
 <body>
-    <br><hr>
-    <a href="<?= site_url('user/logout'); ?>" class="btn btn-dark btn-lg">LOGOUT</a>
-    <div class="container">
-        <div class="panel panel-default">
-            <div class="panel-heading">Welcome User</div>
-            <div class="panel-body">
-                <h3><b>UserID :</b> <?php if(!isset($_SESSION['main_id'])) echo $_SESSION['user_gid']; else echo $_SESSION['main_id'];?> </h3>
-                <h3><b>Email :</b> <?=$_SESSION['user_email']?> </h3>
-                <h3><b>User Data :</b> <?php if(isset($_SESSION['user_data'])) var_dump($_SESSION['user_data']); ?> </h3>
-                <!-- <h3><b>Status :</b> <?php //$_SESSION['user_status']?> </h3> -->
-            </div>
+    <nav class="navbar navbar-expand-lg bg-success p-4">
+        <div class="container-fluid d-flex align-items-center justify-content-center">
+            <a href="<?= site_url('user/index'); ?>" class="navbar-brand fs-3 text-white">Thesis Management System</a>
         </div>
-  </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row p-5 my-4">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 d-flex flex-column align-items-center justify-content-center p-5 bg-light border border-light rounded-3">
+                <h2 class="mb-5">Allow Access</h2>
+                <div class="border border-5 border-success rounded-circle">
+                    <img class="rounded-circle p-1" style="width: 100px; height: 100px;" src="<?= $_SESSION['user_profile']; ?>" alt="User profile">
+                </div>
+                <p class="fs-5 mt-5 text-center mb-5">By clicking Proceed you agree to the terms and conditions applicable to our service and acknowledge that your personal data will be used in accordance with our privacy policy.</p>
+                <a class="btn btn-lg btn-success" href="<?= site_url('user/google'); ?>">Proceed</a>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+    <?php include('footer.php'); ?>
 </body>
 </html>
