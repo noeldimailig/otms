@@ -81,7 +81,7 @@ define('PUBLIC_DIR', $public_folder);
 // Google API configuration
 define('GOOGLE_CLIENT_ID', '477730281256-qgr0i1jj2j4defvge950g4af4h45hi5r.apps.googleusercontent.com');
 define('GOOGLE_CLIENT_SECRET', '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');
-define('GOOGLE_REDIRECT_URL', 'http://localhost/otms/');
+define('GOOGLE_REDIRECT_URL', 'http://localhost/otms/user/google_account_access');
 
 /*
  * ------------------------------------------------------

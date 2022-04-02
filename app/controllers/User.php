@@ -12,6 +12,10 @@ class User extends Controller {
 		$this->call->view('index');
 	}
 
+	public function google_account_access() {
+		$this->call->view('google_account');
+	}
+
 	public function choose() {
 		$this->call->view('choose_account');
 	}
