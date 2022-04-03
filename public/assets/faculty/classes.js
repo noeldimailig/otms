@@ -8,9 +8,6 @@ $(document).ready(function(){
             url: url,
             type: 'POST',
             data: form.serialize(),
-            contentType: false,
-            cache: false,
-            processData: false,
             success: function(response) {
                 var res = JSON.parse(response);
                 if(res.status != false){
@@ -39,7 +36,7 @@ $(document).ready(function(){
         });
     });
   
-    $('#create-class').on('submit', function(e){
+    $('#update-class').on('submit', function(e){
         e.preventDefault();
         var form = $(this);
         var url = form.attr('action');

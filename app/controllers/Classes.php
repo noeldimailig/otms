@@ -2,15 +2,18 @@
 <?php
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
-class Faculty extends Controller {
+class Classes extends Controller {
 	public function __construct()
 	{
 		parent::__construct();
   	}
 
-	public function index()
+	public function open($user_id, $class_code)
 	{
-		$this->call->view('faculty/index');
+		$this->call->model('Class_model');
+
+		$data = $this->Class_model->get_class(decrypt_id($user_id), $class_code);
+		$this->call->view('faculty/classroom');
 	}
 
 	public function students_classlist()
@@ -41,7 +44,7 @@ class Faculty extends Controller {
 		$start = $this->io->post('start');
 		$end = $this->io->post('end');
 
-		$schedule = $day . ', ' . date('h:i', $start) . ' - ' . date('h:i', $end);
+		$schedule = $day . ', ' . date('h:i A', strtotime($start)) . ' - ' . date('h:i A', strtotime($end));
         $class_code = generate_class_code();
         $payment_provider = $this->io->post('provider');
         $payment_acc = $this->io->post('account');
@@ -49,14 +52,14 @@ class Faculty extends Controller {
 		$result = $this->Class_model->create($faculty_id, $course_code, $course_desc, $units, $room, $section, $schedule, $class_code, $payment_provider, $payment_acc);
 
 		if($result) {
-            $msg['status'] = false;
+            $msg['status'] = true;
             $msg['msg'] = "Class creation successful";
-            return json_encode($msg);
+            echo json_encode($msg);
             exit;
         } else{
             $msg['status'] = false;
             $msg['msg'] = "Class creation failed. Please try again.";
-            return json_encode($msg);
+            echo json_encode($msg);
             exit;
         }
 	}

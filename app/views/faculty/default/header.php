@@ -11,4 +11,4 @@
 <?= load_css(array('assets/faculty/style')); ?>
 <?//= load_css(array('assets/css/customcss/content')); ?>
 <?//= load_css(array('assets/css/customcss/notification')); ?>
-<?= load_css(array('assets/css/customcss/dragndrop')); ?>
+<?//= load_css(array('assets/css/customcss/dragndrop')); ?>
