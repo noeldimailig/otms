@@ -244,7 +244,10 @@ class User extends Controller {
 		$this->call->model('User_model');
 
 		$google_id = $_SESSION['user_gid'];
-		$type = $_SESSION['user_type'];
+		$type = "";
+		if(isset($_SESSION['user_type']))
+			$type = $_SESSION['user_type'];
+
 		$profile = $_SESSION['user_profile'];
 		$lname = $_SESSION['user_lname'];
 		$fname = $_SESSION['user_fname'];
@@ -266,8 +269,20 @@ class User extends Controller {
 		} else{
 			if(isset($_SESSION['user_activity'])){	
 				$signin = $this->User_model->google_signin($google_id, $email, $status);
+
+				$_SESSION['user_type'] = $signin['user_type'];
+				
+				if($signin['username'] == "") {
+					$_SESSION['username'] = $signin['fname'] . ' ' . $signin['lname'];
+					$_SESSION['user_id'] = $signin['user_id'];
+				}
+				else
+					$_SESSION['username'] = $signin['username'];				
+
+				$user_type = strtolower($signin['user_type']);
+
 				if($signin){
-					redirect($signin['user_type'].'/index');
+					redirect($user_type.'/index');
 				}else {
 					redirect('user/login');
 				}

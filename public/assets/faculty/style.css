@@ -1367,6 +1367,12 @@ section {
   text-decoration: none;
 }
 
-#image {
-  float: left;
+#add-class {
+  width: 55px;
+  height: 55px;
+}
+
+#add-class:hover {
+  background: #E0E0E0;
+  border-radius: 50%;
 }

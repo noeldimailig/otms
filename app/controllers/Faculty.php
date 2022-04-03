@@ -20,11 +20,12 @@ class Faculty extends Controller {
 		$this->call->view('Faculty_Dashboard/All_Instructors',$data);
 	}
 	
-	public function courses_list()
+	public function classes($user_id)
 	{
-		$this->call->model('Faculty_model');
-		$data['all_courses'] = $this->Faculty_model->view_courses();
-		$this->call->view('Faculty_Dashboard/Courses',$data);
+		$this->call->model('Class_model');
+
+		$data = $this->Class_model->get_classes(decrypt_id($user_id));
+		$this->call->view('faculty/classes', $data);
 	}
 }
 ?>

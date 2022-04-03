@@ -35,6 +35,51 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
  * @license https://opensource.org/licenses/MIT MIT License
  */
 
+if ( ! function_exists('encrypt_id'))
+{
+	function encrypt_id($id) {
+		$formula = (double)$id*71316.09;
+
+		return rtrim(strtr(base64_encode($formula), '+/', '-_'), '=');
+	}
+}
+
+if ( ! function_exists('decrypt_id'))
+{
+	function decrypt_id($encrypt) {
+		$decrypt = base64_decode(str_pad(strtr($encrypt, '-_', '+/'), strlen($encrypt) % 4, '=', STR_PAD_RIGHT));
+		$id = (double)$decrypt/71316.09;
+
+		return $id;
+	}
+}
+
+if ( ! function_exists('check_dp'))
+{
+	function check_dp($dp) {
+		$path = BASE_URL . PUBLIC_DIR . 'assets/img/' . $dp;
+		if(file_exists($path))
+			return $path;
+		else
+			return $dp;
+	}
+}
+
+if ( ! function_exists('generate_class_code'))
+{
+	function generate_class_code() {
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$code = '';
+	  
+		for ($i = 0; $i < 6; $i++) {
+			$index = rand(0, strlen($characters) - 1);
+			$code .= $characters[$index];
+		}
+	  
+		return $code;
+	}
+}
+
 if ( ! function_exists('redirect'))
 {
 	/**
