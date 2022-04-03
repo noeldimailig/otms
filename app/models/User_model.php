@@ -95,5 +95,12 @@ class User_model extends Model {
         else
             return false;
     }
+
+    public function get_user($type, $user_id) {
+        return $this->db->table('users')
+                        ->select('*')
+                        ->where('user_type = ? and user_id = ?', [$type, $user_id])
+                        ->get();
+    }
 }
 ?>

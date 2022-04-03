@@ -8,44 +8,188 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Classes</title> 
+        <title><?= $data['class']['room']; ?></title> 
         <?php include('default/header.php'); ?>
+        <style>body {background-color: #EAECF4;}</style>
     </head> 
   
     <body>
         <?php include('default/topbar.php'); ?>
         <main>
             <div class="container" id="main">
-                <div class="rowmt-5">
-                    <div class="bg-white border-bottom border-secondary d-flex justify-content-between align-items-center p-3 pb-0">
-                        <p class="fs-4">Classes</p>
-                        <div id="add-class" class="d-flex justify-content-center align-items-center mb-2" data-bs-toggle="modal" data-bs-target="#add-class-modal">
-                            <i class="fa-solid fa-add fs-4"></i>
-                        </div>
+                <?php //var_dump($data['student']); ?>
+                <div class="row">
+                    <div class="bg-secondary border border-dark rounded-top d-flex flex-column align-items-center justify-content-center mt-4">
+                        <img style="width: auto; height: 10rem;" src="<?php echo BASE_URL . PUBLIC_DIR.'/assets/img/no-class.svg';?>" alt="">
                     </div>
-
-                    <?php if($data == null) : ?>
-                        <div class="d-flex flex-column align-items-center justify-content-center mt-5">
-                            <img style="width: 25rem;" src="<?php echo BASE_URL . PUBLIC_DIR.'/assets/img/no-class.svg';?>" alt="">
-                            <div class="mt-5">
-                                You do not have a class yet. Create your first class, add students, and start sharing thoughts.
-                            </div>
-                        </div>
-                    <?php else :?>
-                        <div class="row row-cols-1 row-cols-md-4 g-4 p-3">
-                            <?php foreach($data as $class) : ?>
-                                <div class="col">
-                                    <div class="card" style="width: 18rem;">
-                                        <img src="<?php echo BASE_URL . PUBLIC_DIR.'/assets/img/'.$class['photo']; ?>" class="card-img-top" alt="Class Photo">
-                                        <div class="card-body">
-                                            <h5 class="card-title"><a href="<?= site_url('classes/open/'. encrypt_id($class['faculty_id']) . '/' . $class['class_code']); ?>"><?= $class['room']; ?></a></h5>
-                                            <p class="card-text"><?= $class['schedule']; ?></p>
+                    <div class="col-lg-3 col-md-4 bg-light">
+                        <div>
+                            <div class="bg-white mt-3 rounded">
+                                <li class="list-group-item list-group-item-action mb-2">
+                                    <div class="d-flex flex-column justify-content-center align-items-start">
+                                        <p class="fs-5 m-0">Instructor</p>
+                                        <div class="d-flex flex-row justify-content-between align-items-center">
+                                            <img class="border border-3 border-success rounded-circle" style="width: 50px; height: 50px;" src="<?= check_dp($data['faculty']['profile']); ?>" alt="">
+                                            <p class="px-2 m-0">Noel Dimailig</p>
                                         </div>
                                     </div>
-                                </div>
-                            <?php endforeach; ?>
+                                </li>
+                            </div>
+                            <div class="list-group">
+                                <li class="list-group-item list-group-item-action">
+                                    <div class="d-flex flex-column justify-content-center align-items-start">
+                                        <p class="fs-5 m-0">Students</p>
+                                        <?php foreach($data['student'] as $student) : ?>
+                                            <div class="d-flex flex-row justify-content-between align-items-center mb-2">
+                                                <img class="border border-3 border-success rounded-circle" style="width: 35px; height: 35px;" src="<?= check_dp($student['profile']); ?>" alt="">
+                                                <p class="px-2 m-0"><?= $student['lname'] .' '. $student['fname']; ?></p>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </li>
+                            </div>
                         </div>
-                    <?php endif; ?>
+                        
+
+                        <div class="bg-white border border-light rounded mt-4">
+                            <!-- <div class="d-flex justify-content-between p-3 py-2 pb-0 mb-2 rounded-top border-bottom border-secondary bg-white">
+                                <p class="mt-2">Class Joining Requests</p>
+                                <i class="fa-solid fa-ellipsis-vertical mt-2"></i>
+                            </div> -->
+                            <div class="list-group">
+                                <li class="list-group-item list-group-item-action">
+                                    <div class="d-flex flex-column justify-content-center align-items-start">
+                                        <div class="d-flex w-100 flex-row justify-content-between align-items-center border-bottom py-2 mb-3">
+                                            <p class="fs-6 m-0">Class Joining Requests</p>
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </div>
+                                        <?php foreach($data['student'] as $student) : ?>
+                                            <div class="d-flex justify-content-between align-items-center w-100 mb-3">
+                                                <div class="d-flex flex-row justify-content-between align-items-center">
+                                                    <img class="border border-1 border-success rounded-circle" style="width: 30px; height: 30px;" src="<?php echo BASE_URL . PUBLIC_DIR.'/assets/img/Noel.png';?>" alt="">
+                                                    <p class="px-2 m-0">Noel Dimailig</p>
+                                                </div>
+                                                <div class="d-flex flex-row w-25 justify-content-between align-items-center">
+                                                    <input type="submit" value="&#x2716;" class="btn btn-secondary btn-sm">
+                                                    <input type="submit" value="&#x2714;" class="btn btn-success btn-sm">
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-8 p-3"></div>
+                    <div class="col-lg-3 col-md-4 bg-white">
+                        <div class="bg-white border border-light p-3">
+                            <div class="d-flex justify-content-between p-3 py-2 pb-0 mb-2 border-bottom border-secondary bg-white">
+                                <p>Schedule</p>
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </div>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <div class="bg-info rounded-circle"><i class="fa-solid fa-file fs-5 p-3 text-white"></i></div>
+                                        <div class="px-4">
+                                            <small class="text-secondary">3 days ago</small>
+                                            <p class="mb-1 fs-6">Some placeholder content in a paragraph.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <div class="bg-info rounded-circle"><i class="fa-solid fa-file fs-5 p-3 text-white"></i></div>
+                                        <div class="px-4">
+                                            <small class="text-secondary">3 days ago</small>
+                                            <p class="mb-1 fs-6">Some placeholder content in a paragraph.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <div class="bg-info rounded-circle"><i class="fa-solid fa-file fs-5 p-3 text-white"></i></div>
+                                        <div class="px-4">
+                                            <small class="text-secondary">3 days ago</small>
+                                            <p class="mb-1 fs-6">Some placeholder content in a paragraph.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <div class="bg-info rounded-circle"><i class="fa-solid fa-file fs-5 p-3 text-white"></i></div>
+                                        <div class="px-4">
+                                            <small class="text-secondary">3 days ago</small>
+                                            <p class="mb-1 fs-6">Some placeholder content in a paragraph.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <div class="bg-info rounded-circle"><i class="fa-solid fa-file fs-5 p-3 text-white"></i></div>
+                                        <div class="px-4">
+                                            <small class="text-secondary">3 days ago</small>
+                                            <p class="mb-1 fs-6">Some placeholder content in a paragraph.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-light p-3 mt-5">
+                            <div class="d-flex justify-content-between p-3 py-2 pb-0 mb-2 border-bottom border-secondary bg-white">
+                                <p>Notifications</p>
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </div>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <div class="bg-info rounded-circle"><i class="fa-solid fa-file fs-5 p-3 text-white"></i></div>
+                                        <div class="px-4">
+                                            <small class="text-secondary">3 days ago</small>
+                                            <p class="mb-1 fs-6">Some placeholder content in a paragraph.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <div class="bg-info rounded-circle"><i class="fa-solid fa-file fs-5 p-3 text-white"></i></div>
+                                        <div class="px-4">
+                                            <small class="text-secondary">3 days ago</small>
+                                            <p class="mb-1 fs-6">Some placeholder content in a paragraph.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <div class="bg-info rounded-circle"><i class="fa-solid fa-file fs-5 p-3 text-white"></i></div>
+                                        <div class="px-4">
+                                            <small class="text-secondary">3 days ago</small>
+                                            <p class="mb-1 fs-6">Some placeholder content in a paragraph.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <div class="bg-info rounded-circle"><i class="fa-solid fa-file fs-5 p-3 text-white"></i></div>
+                                        <div class="px-4">
+                                            <small class="text-secondary">3 days ago</small>
+                                            <p class="mb-1 fs-6">Some placeholder content in a paragraph.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <div class="bg-info rounded-circle"><i class="fa-solid fa-file fs-5 p-3 text-white"></i></div>
+                                        <div class="px-4">
+                                            <small class="text-secondary">3 days ago</small>
+                                            <p class="mb-1 fs-6">Some placeholder content in a paragraph.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>   
             </div>  
         </main>

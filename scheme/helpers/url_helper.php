@@ -1,4 +1,7 @@
 <?php
+
+use Google\Service\AdMob\App;
+
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 /**
  * ------------------------------------------------------------------
@@ -57,8 +60,8 @@ if ( ! function_exists('decrypt_id'))
 if ( ! function_exists('check_dp'))
 {
 	function check_dp($dp) {
-		$path = BASE_URL . PUBLIC_DIR . 'assets/img/' . $dp;
-		if(file_exists($path))
+		$path = BASE_URL . PUBLIC_DIR . '/assets/img/' . $dp;
+		if(strlen($dp) < 10)
 			return $path;
 		else
 			return $dp;

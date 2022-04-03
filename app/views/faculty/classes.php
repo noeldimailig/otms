@@ -16,14 +16,13 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         <?php include('default/topbar.php'); ?>
         <main>
             <div class="container" id="main">
-                <div class="rowmt-5">
+                <div class="row mt-5">
                     <div class="bg-white border-bottom border-secondary d-flex justify-content-between align-items-center p-3 pb-0">
                         <p class="fs-4">Classes</p>
                         <div id="add-class" class="d-flex justify-content-center align-items-center mb-2" data-bs-toggle="modal" data-bs-target="#add-class-modal">
                             <i class="fa-solid fa-add fs-4"></i>
                         </div>
                     </div>
-
                     <?php if($data == null) : ?>
                         <div class="d-flex flex-column align-items-center justify-content-center mt-5">
                             <img style="width: 25rem;" src="<?php echo BASE_URL . PUBLIC_DIR.'/assets/img/no-class.svg';?>" alt="">
@@ -40,6 +39,10 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                                         <div class="card-body">
                                             <h5 class="card-title"><a href="<?= site_url('classes/open/'. encrypt_id($class['faculty_id']) . '/' . $class['class_code']); ?>"><?= $class['room']; ?></a></h5>
                                             <p class="card-text"><?= $class['schedule']; ?></p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <p class="card-text fs-6 mb-0 text-scondary">Total Students</p>
+                                                <p class="card-text fs-6 mb-0 text-scondary"><?= $class['count']; ?></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

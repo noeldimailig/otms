@@ -11,16 +11,19 @@ class Classes extends Controller {
 	public function open($user_id, $class_code)
 	{
 		$this->call->model('Class_model');
+		$this->call->model('User_model');
 
-		$data = $this->Class_model->get_class(decrypt_id($user_id), $class_code);
-		$this->call->view('faculty/classroom');
+		$data['class'] = $this->Class_model->get_class($class_code, decrypt_id($user_id));
+		$data['faculty'] = $this->User_model->get_user('Faculty', decrypt_id($user_id));
+		$data['student'] = $this->Class_model->get_students($class_code);
+
+		$this->call->view('faculty/classroom', $data);
 	}
 
-	public function students_classlist()
+	public function count_students($class_code, $user_id)
 	{
-		$this->call->model('Student_model');
-		$data['students'] = $this->Student_model->students_classlist();
-		$this->call->view('faculty/students_classlist',$data);
+		$this->call->model('Class_model');
+		return $this->Class_model->count_students($class_code, $user_id);
 	}
 
     public function all_students()

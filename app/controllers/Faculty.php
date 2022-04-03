@@ -24,7 +24,18 @@ class Faculty extends Controller {
 	{
 		$this->call->model('Class_model');
 
-		$data = $this->Class_model->get_classes(decrypt_id($user_id));
+		$results = $this->Class_model->get_active_classes(decrypt_id($user_id));
+
+		$data = [];
+		$i = 0;
+		foreach($results as $result) {
+			$counts = $this->Class_model->count_students($result['class_code']);
+			foreach($counts as $count){
+				$result['count'] = $count;
+			}
+			array_push($data, (array)$result);
+		}
+
 		$this->call->view('faculty/classes', $data);
 	}
 }
