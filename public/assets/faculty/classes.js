@@ -75,8 +75,45 @@ $(document).ready(function(){
             }
         });
     });
+
+    $('#accept-student').on('submit', function(e){
+        e.preventDefault();
+        var form = $(this);
+        var url = form.attr('action');
+    
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: form.serialize(),
+            success: function(response) {
+                var res = JSON.parse(response);
+                if(res.status != false){
+                    $('#student'+res.id).remove();
+                    $('#accept-status').show();
+                    alertSuccess('accept-status', res.msg);
+                        setTimeout(function(){
+                            $('#message-content').remove();
+                            $('#message').hide();
+                            location.reload();
+                    }, 3000);
+                } else {
+                    $('#accept-status').show();
+                    alertError('accept-status', res.msg);
+                    setTimeout(function(){
+                    $('#message-content').remove();
+                    $('#message').hide();
+                    }, 3000);
+                }
+            }
+        });
+    });
+
+    $(document).on('click', '.deny', function (){
+        $(this).closest('.join-request').remove();
+    });
+   
 });
-  
+
 function alertSuccess(form, message) {
     $('#'+form).append(
         '<div id="message-content">' +

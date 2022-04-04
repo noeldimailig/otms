@@ -17,13 +17,28 @@ class Class_model extends Model {
 					->get();
 	}
 
-	public function get_students($class_code) {
+	public function get_students($class_code, $status) {
 		return $this->db->table('student_course as s')
 					->select('s.student_id, u.username, u.fname, u.lname, u.profile, u.email')
 					->inner_join('users as u', 'u.user_id = s.student_id')
 					->inner_join('course as c', 'c.course_id = s.course_id')
-					->where('c.class_code = ? and s.join_status = ?', [$class_code, 1])
+					->where('c.class_code = ? and s.join_status = ?', [$class_code, $status])
 					->get_all();
+	}
+
+	public function accept_student($stud_id, $course_id) {
+		$status = ['join_status' => 1];
+		$result = $this->db->table('student_course')
+							->update($status)
+							->where('student_id = ? and course_id = ? and join_status = ?', [$stud_id, $course_id, 0])
+							->exec();
+		if($result) {
+			return $this->db->table('student_course as s')
+						->select('s.student_id, c.class_code')
+						->inner_join('course as c', 'c.course_id = s.course_id')
+						->where('s.student_id', $stud_id)
+						->get();
+		}
 	}
 	
 	public function get_active_classes($user_id) {

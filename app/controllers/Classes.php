@@ -15,9 +15,49 @@ class Classes extends Controller {
 
 		$data['class'] = $this->Class_model->get_class($class_code, decrypt_id($user_id));
 		$data['faculty'] = $this->User_model->get_user('Faculty', decrypt_id($user_id));
-		$data['student'] = $this->Class_model->get_students($class_code);
+		$data['accepted'] = $this->Class_model->get_students($class_code, 1);
+		$data['joining'] = $this->Class_model->get_students($class_code, 0);
 
 		$this->call->view('faculty/classroom', $data);
+	}
+
+	public function students($user_id, $class_code)
+	{
+		$this->call->model('Class_model');
+
+		$data['class'] = $this->Class_model->get_class($class_code, decrypt_id($user_id));
+		$data['accepted'] = $this->Class_model->get_students($class_code, 1);
+
+		$this->call->view('faculty/student_lists', $data);
+	}
+
+	public function load_students($class_code) {
+		$this->call->model('Class_model');
+		$data['accepted'] = $this->Class_model->get_students($class_code, 1);
+
+		return $data['accepted'];
+	}
+
+	public function accept_student() {
+		$this->call->model('Class_model');
+
+		$stud_id = decrypt_id($this->io->post('stud_id'));
+		$course_id = decrypt_id($this->io->post('course_id'));
+
+		$result = $this->Class_model->accept_student($stud_id, $course_id);
+		if($result) {
+            $msg['status'] = true;
+			$msg['id'] = encrypt_id($result['student_id']);
+			$msg['code'] = $result['class_code'];
+            $msg['msg'] = "Accepting student successful";
+            echo json_encode($msg);
+            exit;
+        } else{
+            $msg['status'] = false;
+            $msg['msg'] = "Accepting student failed. Please try again.";
+            echo json_encode($msg);
+            exit;
+        }
 	}
 
 	public function count_students($class_code, $user_id)

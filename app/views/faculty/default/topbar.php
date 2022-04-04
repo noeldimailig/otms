@@ -22,17 +22,17 @@
                   </a>
                   <ul>
                       <?php if($_SESSION['user_type'] == "Faculty" || $_SESSION['user_type'] == "Student") : ?>
-                          <li><a href="<?php echo site_url('nav/dashboard'); ?>">Go to Dashboard</a></li>
+                          <!-- <li><a href="<?php //echo site_url('nav/dashboard'); ?>">Go to Dashboard</a></li>
                           <li><a href="<?php //echo site_url("nav/myprofile/". encrypt_id($_SESSION['user_id'])); ?>">My Profile</a></li>
                           <li><a href="<?php //echo site_url("nav/mydocuments/". encrypt_id($_SESSION['user_id'])); ?>">My Documents</a></li>
                           <li><a href="<?php //echo site_url('nav/mycitations/'. encrypt_id($_SESSION['user_id'])); ?>">Saved Citations</a></li>
-                          <li><a href="<?php //echo site_url('nav/mybookmarks/'. encrypt_id($_SESSION['user_id'])); ?>">Bookmarked Documents</a></li>
+                          <li><a href="<?php //echo site_url('nav/mybookmarks/'. encrypt_id($_SESSION['user_id'])); ?>">Bookmarked Documents</a></li> -->
                           <li><a href="<?php echo site_url('user/logout'); ?>">Log Out</a></li>
                           <?php else: ?>
-                          <li><a href="<?php //echo site_url("nav/myprofile/". encrypt_id($_SESSION['user_id'])); ?>">My Profile</a></li>
-                          <li><a href="<?php //echo site_url("nav/mydocuments/". encrypt_id($_SESSION['user_id'])); ?>">My Documents</a></li>
+                          <li><a href="<?php echo site_url("nav/myprofile/". encrypt_id($_SESSION['user_id'])); ?>">My Profile</a></li>
+                          <!-- <li><a href="<?php //echo site_url("nav/mydocuments/". encrypt_id($_SESSION['user_id'])); ?>">My Documents</a></li>
                           <li><a href="<?php //echo site_url('nav/mycitations/'. encrypt_id($_SESSION['user_id'])); ?>">Saved Citations</a></li>
-                          <li><a href="<?php //echo site_url('nav/mybookmarks/'. encrypt_id($_SESSION['user_id'])); ?>">Bookmarked Documents</a></li>
+                          <li><a href="<?php //echo site_url('nav/mybookmarks/'. encrypt_id($_SESSION['user_id'])); ?>">Bookmarked Documents</a></li> -->
                           <li><a href="<?php echo site_url('user/logout'); ?>">Log Out</a></li>
                         <?php endif ?>
                     </ul>
