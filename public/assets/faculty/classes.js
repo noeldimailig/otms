@@ -108,6 +108,37 @@ $(document).ready(function(){
         });
     });
 
+    $('#student-join-class').on('submit', function(e){
+        e.preventDefault();
+        var form = $(this);
+        var url = form.attr('action');
+    
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: form.serialize(),
+            success: function(response) {
+                var res = JSON.parse(response);
+                if(res.status != false){
+                    $('#join-class-message').show();
+                    alertSuccess('join-class-message', res.msg);
+                        setTimeout(function(){
+                            $('#message-content').remove();
+                            $('#message').hide();
+                            location.reload();
+                    }, 3000);
+                } else {
+                    $('#join-class-message').show();
+                    alertError('join-class-message', res.msg);
+                    setTimeout(function(){
+                    $('#message-content').remove();
+                    $('#message').hide();
+                    }, 3000);
+                }
+            }
+        });
+    });
+
     $(document).on('click', '.deny', function (){
         $(this).closest('.join-request').remove();
     });

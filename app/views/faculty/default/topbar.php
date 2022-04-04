@@ -13,7 +13,7 @@
             <li><a href="<?php echo site_url('faculty/index'); ?>">Home</a></li>
             <li><a href="<?php echo site_url('faculty/classes/'. encrypt_id($_SESSION['user_id'])); ?>">Classes</a></li>
             <li><a href="<?php echo site_url('faculty/files'); ?>">Files</a></li>
-            <li><a href="<?php echo site_url('faculty/conference'); ?>">Conference</a></li>
+            <!-- <li><a href="<?php //echo site_url('faculty/conference'); ?>">Conference</a></li> -->
             <?php if($this->session->userdata('user_email')) : ?> 
               <li class="dropdown d-flex flex-row justify-content-center">
                   <a href="<?php echo site_url('faculty/profile'); ?>">

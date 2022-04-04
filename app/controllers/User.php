@@ -53,7 +53,7 @@ class User extends Controller {
 				'fname' => $result['fname'],
 				'lname' => $result['lname'],
 				'user_profile' => $result['profile'],
-				'user_role' => $result['user_type'],
+				'user_type' => $result['user_type'],
 				'user_email' => $result['email'],
 			);
 

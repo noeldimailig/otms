@@ -66,7 +66,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                     </div>
                     <div class="col-lg-6 col-md-8 p-3"></div>
                     <div class="col-lg-3 col-md-4 bg-white">
-                        <div class="bg-white border border-light p-3">
+                        <!-- <div class="bg-white border border-light p-3">
                             <div class="d-flex justify-content-between p-3 py-2 pb-0 mb-2 border-bottom border-secondary bg-white">
                                 <p>Schedule</p>
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -118,9 +118,9 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                                     </div>
                                 </a>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="bg-white border border-light p-3 mt-5">
+                        <div class="bg-white border border-light p-3 mt-3">
                             <div class="d-flex justify-content-between p-3 py-2 pb-0 mb-2 border-bottom border-secondary bg-white">
                                 <p>Notifications</p>
                                 <i class="fa-solid fa-ellipsis-vertical"></i>

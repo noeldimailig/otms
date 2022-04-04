@@ -15,6 +15,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
     <body>
         <?php include('default/topbar.php'); ?>
         <main>
+        <?php var_dump($data); ?>
             <div class="px-5 mx-5" id="main">
                 <div class="row mt-5">
                     <div class="col-lg-3 col-md-4 bg-white p-3">
