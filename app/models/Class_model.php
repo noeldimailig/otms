@@ -17,6 +17,21 @@ class Class_model extends Model {
 					->get();
 	}
 
+	public function count_total_students($faculty_id) {
+		return $this->db->table('student_course as s')
+					->select_count('s.student_id', 'total')
+					->inner_join('course as c', 'c.course_id = s.course_id')
+					->where('c.faculty_id = ? and s.join_status = ?', [$faculty_id, 1])
+					->get();
+	}
+
+	public function count_classes($faculty_id) {
+		return $this->db->table('course')
+					->select_count('faculty_id', 'total')
+					->where('faculty_id', $faculty_id)
+					->get();
+	}
+
 	public function get_students($class_code, $status) {
 		return $this->db->table('student_course as s')
 					->select('s.student_id, u.username, u.fname, u.lname, u.profile, u.email')

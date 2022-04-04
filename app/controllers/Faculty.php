@@ -10,7 +10,14 @@ class Faculty extends Controller {
 
 	public function index()
 	{
-		$this->call->view('faculty/index');
+		$user_id = $_SESSION['user_id'];
+		$this->call->model('Class_model');
+		$this->call->model('User_model');
+
+		$data['total_class'] = $this->Class_model->count_classes($user_id);
+		$data['total_students'] = $this->Class_model->count_total_students($user_id);
+		$data['faculty'] = $this->User_model->get_user('Faculty', $user_id);
+		$this->call->view('faculty/index', $data);
 	}
 
 	public function teachers_list()
@@ -27,7 +34,6 @@ class Faculty extends Controller {
 		$results = $this->Class_model->get_active_classes(decrypt_id($user_id));
 
 		$data = [];
-		$i = 0;
 		foreach($results as $result) {
 			$counts = $this->Class_model->count_students($result['class_code']);
 			foreach($counts as $count){

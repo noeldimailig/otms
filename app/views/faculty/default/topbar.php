@@ -1,7 +1,7 @@
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-between justify-content-between">
         <div class="d-flex flex-row align-items-center justify-content-between">
-            <h4 class="logo me-auto"><a href="<?php echo site_url('nav/index'); ?>">OTMS</a></h4>
+            <h4 class="logo me-auto"><a href="<?php echo site_url('faculty/index'); ?>">OTMS</a></h4>
             <form class="d-flex  px-2">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>

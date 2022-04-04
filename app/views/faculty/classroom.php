@@ -30,7 +30,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                                             <p class="fs-5 m-0">Instructor</p>
                                             <div class="d-flex flex-row justify-content-between align-items-center">
                                                 <img class="border border-3 border-success rounded-circle" style="width: 50px; height: 50px;" src="<?= check_dp($data['faculty']['profile']); ?>" alt="">
-                                                <p class="px-2 m-0">Noel Dimailig</p>
+                                                <p class="px-2 m-0"><?= $data['faculty']['lname'] .' '. $data['faculty']['fname']; ?></p>
                                             </div>
                                         </div>
                                     </li>
@@ -88,8 +88,14 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-8"></div>
-                        <div class="col-lg-3 col-md-4 bg-white mb-5">
+                        <div class="col-lg-6 col-md-8 mt-3">
+                            <div class="d-flex">
+                                <div class="d-flex flex-row justify-content-between align-items-center">
+                                    <img class="border border-3 border-success rounded-circle" style="width: 50px; height: 50px;" src="<?= check_dp($data['faculty']['profile']); ?>" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 bg-white mt-3 mb-5">
                             <div class="bg-white border border-light p-3">
                                 <div class="d-flex justify-content-between p-3 py-2 pb-0 mb-2 border-bottom border-secondary bg-white">
                                     <p>Schedule</p>

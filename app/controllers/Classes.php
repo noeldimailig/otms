@@ -31,13 +31,6 @@ class Classes extends Controller {
 		$this->call->view('faculty/student_lists', $data);
 	}
 
-	public function load_students($class_code) {
-		$this->call->model('Class_model');
-		$data['accepted'] = $this->Class_model->get_students($class_code, 1);
-
-		return $data['accepted'];
-	}
-
 	public function accept_student() {
 		$this->call->model('Class_model');
 
