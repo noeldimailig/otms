@@ -15,16 +15,16 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
     <body>
         <?php include('default/topbar.php'); ?>
         <main>
-        <?php var_dump($data); ?>
+        <?php //var_dump($data); ?>
             <div class="px-5 mx-5" id="main">
                 <div class="row mt-5">
                     <div class="col-lg-3 col-md-4 bg-white p-3">
                         <div class="card mb-5 bg-white border border-light">
                             <div class="card-body">
                                 <div class="text-center">
-                                    <img class="border border-5 border-success rounded-circle" style="width: 150px; height: 150px;" src="<?php echo BASE_URL . PUBLIC_DIR.'/assets/img/Lileth.png';?>" alt="">
-                                    <h4 class="mt-3 mb-0">Lileth Pine</h4>
-                                    <p class="mb-0">BSIT - IIIF1</p>
+                                    <img class="border border-5 border-success rounded-circle" style="width: 150px; height: 150px;" src="<?= check_dp($data['student']['profile']);?>" alt="">
+                                    <h4 class="mt-3 mb-0"><?= $data['student']['fname']. ' ' .$data['student']['lname']; ?></h4>
+                                    <p class="mb-0"><?php if($data['student']['position'] == "") echo "Student"; else echo $data['student']['position']; ?></p>
                                 </div>
                                 <div class="mt-3 border-1 border-bottom mb-4">
                                     <h4 class="text-center"></h4>
@@ -43,48 +43,18 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                                 <a href="#" class="list-group-item list-group-item-action">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-flex flex-row justify-content-between align-items-center">
-                                            <img class="border border-1 border-success rounded-circle" style="width: 30px; height: 30px;" src="<?php echo BASE_URL . PUBLIC_DIR.'/assets/img/Noel.png';?>" alt="">
-                                            <p class="px-3 m-0">Noel Dimailig</p>
+                                        <?php foreach($data['accepted'] as $student) : ?>
+                                                <div class="d-flex flex-row justify-content-start align-items-center mb-2">
+                                                    <img class="border border-3 border-success rounded-circle" style="width: 35px; height: 35px;" src="<?= check_dp($student['profile']); ?>" alt="">
+                                                    <p class="px-2 m-0"><?= $student['lname'] .' '. $student['fname']; ?></p>
+                                                </div>
+                                            <?php endforeach; ?>
+                                            
                                         </div>
                                         
                                     </div>
                                 </a>
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="d-flex flex-row justify-content-between align-items-center">
-                                            <img class="border border-1 border-success rounded-circle" style="width: 30px; height: 30px;" src="<?php echo BASE_URL . PUBLIC_DIR.'/assets/img/Eduardo.png';?>" alt="">
-                                            <p class="px-3 m-0">Eduardo Cabello</p>
-                                        </div>
-                                       
-                                    </div>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="d-flex flex-row justify-content-between align-items-center">
-                                            <img class="border border-1 border-success rounded-circle" style="width: 30px; height: 30px;" src="<?php echo BASE_URL . PUBLIC_DIR.'/assets/img/Noel.png';?>" alt="">
-                                            <p class="px-3 m-0">Noel Dimailig</p>
-                                        </div>
-                                        
-                                    </div>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="d-flex flex-row justify-content-between align-items-center">
-                                            <img class="border border-1 border-success rounded-circle" style="width: 30px; height: 30px;" src="<?php echo BASE_URL . PUBLIC_DIR.'/assets/img/Eduardo.png';?>" alt="">
-                                            <p class="px-3 m-0">Eduardo Cabello</p>
-                                        </div>
-                                       
-                                    </div>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="d-flex flex-row justify-content-between align-items-center">
-                                            <img class="border border-1 border-success rounded-circle" style="width: 30px; height: 30px;" src="<?php echo BASE_URL . PUBLIC_DIR.'/assets/img/Noel.png';?>" alt="">
-                                            <p class="px-3 m-0">Noel Dimailig</p>
-                                        </div>
-                                        
-                                    </div>
-                                </a>
+                                
                                 </div>
                                 
                             </div>

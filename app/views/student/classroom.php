@@ -8,7 +8,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title><!--<?= $data['class']['room']; ?>--></title> 
+        <title><?= $data['class']['room']; ?></title> 
         <?php include('default/header.php'); ?>
         <style>body {background-color: #EAECF4;}</style>
     </head> 
@@ -17,7 +17,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         <?php include('default/topbar.php'); ?>
         <main>
             <div class="container" id="main">
-               <!-- <?php var_dump($data['student']); ?> -->
+                <?php //var_dump($data['student']); ?> 
                 <div class="row">
                     <div class="bg-secondary border border-dark rounded-top d-flex flex-column align-items-center justify-content-center mt-4">
                         <img style="width: auto; height: 10rem;" src="<?php echo BASE_URL . PUBLIC_DIR.'/assets/img/join-class.png';?>" alt="">
@@ -29,8 +29,8 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                                     <div class="d-flex flex-column justify-content-center align-items-start">
                                         <p class="fs-5 m-0">Student</p>
                                         <div class="d-flex flex-row justify-content-between align-items-center">
-                                            <img class="border border-3 border-success rounded-circle" style="width: 50px; height: 50px;" src="" alt="">
-                                            <p class="px-2 m-0">Lileth Pine</p>
+                                            <img class="border border-3 border-success rounded-circle" style="width: 50px; height: 50px;" src="<?= check_dp($data['student']['profile']); ?>" alt="">
+                                            <p class="px-2 m-0"><?= $data['student']['lname'] .' '. $data['student']['fname']; ?></p>
                                         </div>
                                     </div>
                                 </li>
@@ -39,31 +39,31 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                                 <li class="list-group-item list-group-item-action">
                                     <div class="d-flex flex-column justify-content-center align-items-start">
                                         <p class="fs-5 m-0">Classmates</p>
-                                        <!--<?php foreach($data['student'] as $student) : ?>-->
+                                        <?php foreach($data['student'] as $student) : ?>
                                             <div class="d-flex flex-row justify-content-between align-items-center mb-2">
                                                 <img class="border border-3 border-success rounded-circle" style="width: 35px; height: 35px;" src="" alt="">
-                                                <p class="px-2 m-0"><!--<?= $student['lname'] .' '. $student['fname']; ?>--></p>
+                                                <p class="px-2 m-0"><?= $student['lname'] .' '. $student['fname']; ?></p>
                                             </div>
-                                        <!--<?php endforeach; ?>-->
+                                        <?php endforeach; ?>
                                     </div>
                                 </li>
                             </div>
                         </div>
                         
 
-                        <div class="bg-white border border-light rounded mt-4">
+                      <!--  <div class="bg-white border border-light rounded mt-4">
                             <!-- <div class="d-flex justify-content-between p-3 py-2 pb-0 mb-2 rounded-top border-bottom border-secondary bg-white">
                                 <p class="mt-2">Class Joining Requests</p>
                                 <i class="fa-solid fa-ellipsis-vertical mt-2"></i>
                             </div> -->
-                            <div class="list-group">
+                        <!--    <div class="list-group">
                                 <li class="list-group-item list-group-item-action">
                                     <div class="d-flex flex-column justify-content-center align-items-start">
                                         <div class="d-flex w-100 flex-row justify-content-between align-items-center border-bottom py-2 mb-3">
                                             <p class="fs-6 m-0">Class Joining Requests</p>
                                             <i class="fa-solid fa-ellipsis-vertical"></i>
-                                        </div>
-                                        <!--<?php foreach($data['student'] as $student) : ?>-->
+                                        </div> -->
+                                        <!--<?php foreach($data['student'] as $student) : ?>
                                             <div class="d-flex justify-content-between align-items-center w-100 mb-3">
                                                 <div class="d-flex flex-row justify-content-between align-items-center">
                                                     <img class="border border-1 border-success rounded-circle" style="width: 30px; height: 30px;" src="<?php echo BASE_URL . PUBLIC_DIR.'/assets/img/Noel.png';?>" alt="">
@@ -74,12 +74,12 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                                                     <input type="submit" value="&#x2714;" class="btn btn-success btn-sm">
                                                 </div>
                                             </div>
-                                        <!--<?php endforeach; ?>-->
+                                        <?php endforeach; ?>
                                     </div>
                                 </li>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="col-lg-6 col-md-8 p-3"></div>
                     <div class="col-lg-3 col-md-4 bg-white">
                         <div class="bg-white border border-light p-3">
