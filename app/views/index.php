@@ -29,10 +29,10 @@ include('config.php');
 
                 <div class="container">
                     <div class="carousel-caption text-start">
-                        <h1>Focussed on Research Learning</h1>
-                        <p>The platform will be solely for research classes. It will draw more attention to student's needs on the development of their research projects.
+                        <h1 class="mb-4">Focussed on Research Learning</h1>
+                        <p class="mb-3">The platform will be solely for research classes. It will draw more attention to student's needs on the development of their research projects.
                             </p>
-                        <p><a class="btn btn-sm btn-danger" href="">Sign up Now!</a>
+                        <p class="mb-5"><a class="btn btn-sm btn-danger" href="<?= site_url('user/choose'); ?>">Sign up Now!</a>
                         </p>
                     </div>
                 </div>
@@ -43,10 +43,10 @@ include('config.php');
 
                 <div class="container">
                     <div class="carousel-caption">
-                        <h1>Interactive Environment</h1>
-                        <p>Students and research teachers could efficiently interact with each others regarding with each others concern. Faculty and research and development
+                        <h1 class="mb-4">Interactive Environment</h1>
+                        <p class="mb-3">Students and research teachers could efficiently interact with each others regarding with each others concern. Faculty and research and development
                             office could work and collaborate hand on hand for the complilation of the files needed to be handed over under the care of the school.</p>
-                        <p><a class="btn btn-sm btn-danger" href="">Sign up Now!</a>
+                        <p class="mb-5"><a class="btn btn-sm btn-danger" href="<?= site_url('user/choose'); ?>">Sign up Now!</a>
                         </p>
                     </div>
                 </div>
@@ -57,9 +57,9 @@ include('config.php');
 
                 <div class="container">
                     <div class="carousel-caption text-end">
-                        <h1>Safe and Sound</h1>
-                        <p>The platorm will ensure the safety of the files being stored to the archive or library of the system. </p>
-                        <p><a class="btn btn-sm btn-danger" href="">Sign up Now!</a>
+                        <h1 class="mb-4">Safe and Sound</h1>
+                        <p class="mb-3">The platorm will ensure the safety of the files being stored to the archive or library of the system. </p>
+                        <p class="mb-5"><a class="btn btn-sm btn-danger" href="<?= site_url('user/choose'); ?>">Sign up Now!</a>
                         </p>
                     </div>
                 </div>
@@ -75,8 +75,7 @@ include('config.php');
         </button>
     </div>
     <main class="container pb-5">
-  <div class="row g-5 mt-3">
-  <hr class="my-4">
+  <div class="row g-5 mt-3 mb-5">
     <div class="container-fluid padding" >
       <div class="row padding">
 
@@ -85,28 +84,28 @@ include('config.php');
         </div>
         <div class="col-md-12 col-lg-8">
         <br><br><br>
-          <h1>Archive</h1>
-          <p>Files are created into a digital format and then transfered to a didgital library, an archive.
+          <h1 class="mb-4">Archive</h1>
+          <p class="mb-3">Files are created into a digital format and then transfered to a didgital library, an archive.
             It is where the completed researches, thesis, dissesrtations, narratives and such related papers are stored.
           </p>
-          <a href="archive.php" class="btn btn-outline-secondary">Go to</a>
+          <a href="<?php if(!isset($_SESSION['user_email'])) echo site_url('user/login'); else echo site_url('archive/index'); ?>" class="btn btn-outline-secondary">Go to</a>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="row g-5 mt-3">
+  <hr class="my-4">
+
+  <div class="row g-5 mt-3 mb-5">
     <div class="container-fluid padding" >
       <div class="row padding">
-
-        
         <div class="col-md-12 col-lg-8">
         <br><br><br><br>
-          <h1>Virtual Classroom</h1>
-          <p> The platform also has an available feature or tool for a new learning environment, it will be 
+          <h1 class="mb-4">Virtual Classroom</h1>
+          <p class="mb-3"> The platform also has an available feature or tool for a new learning environment, it will be 
             exclusive for research subject that will enable a unified research learning with virtual online classs.
           </p>
-          <a href="mainclass.php" class="btn btn-outline-secondary">Go to</a>
+          <a href="<?php if(!isset($_SESSION['user_email'])) echo site_url('user/login'); else echo site_url('classes/index'); ?>" class="btn btn-outline-secondary">Go to</a>
         </div>
         <div class="col-lg-4">
           <img src="<?= BASE_URL . PUBLIC_DIR . '/assets/img/notebook.png'; ?>" class="img-fluid">
@@ -115,7 +114,9 @@ include('config.php');
     </div>
   </div>
 
-  <div class="row g-5 mt-3">
+  <hr class="my-4">
+
+  <div class="row g-5 mt-3 mb-5">
     <div class="container-fluid padding" >
       <div class="row padding">
 
@@ -124,34 +125,16 @@ include('config.php');
         </div>
         <div class="col-md-12 col-lg-8">
         <br><br><br><br>
-          <h1>Conference Room</h1>
-          <p>The platform will serve with an online video conferencing feature that could open oppurtunities 
+          <h1 class="mb-4">Conference Room</h1>
+          <p class="mb-3">The platform will serve with an online video conferencing feature that could open oppurtunities 
             for the students and teachers to have a collaborative and healthy kind of learning.
           </p>
-          <a href="conference.php" class="btn btn-outline-secondary">Go to</a>
+          <a href="<?php if(!isset($_SESSION['user_email'])) echo site_url('user/login'); else echo site_url('conference/index'); ?>" class="btn btn-outline-secondary">Go to</a>
         </div>
       </div>
     </div>
-    <hr class="my-4">
   </div>
-
-
-
-<div class="container-fluid padding">
-	<div class="row text-center padding">
-		<div class="col-12">
-			<h2>Connect</h2>
-		</div>
-		<div class="col-12 social padding">
-			<a href="#"><i class="fab fa-facebook"></i></a>
-			<a href="#"><i class="fab fa-twitter"></i></a>
-			<a href="#"><i class="fab fa-google-plus-g"></i></a>
-			<a href="#"><i class="fab fa-instagram"></i></a>
-			<a href="#"><i class="fab fa-youtube"></i></a>
-		</div>
-	</div>
-</div>
-
+  <hr class="my-4">
 </main>
     <?php include('footer.php'); ?>
 </body>

@@ -20,6 +20,14 @@ class Faculty extends Controller {
 		$this->call->view('faculty/index', $data);
 	}
 
+	public function myprofile($user_id) {
+		$this->call->model('User_model');
+		$data = $this->User_model->get_user('Faculty', decrypt_id($user_id));
+
+		$data['address'] = explode(',', $data['address']);
+		$this->call->view('faculty/myprofile', $data);
+	}
+
 	public function teachers_list()
 	{
 		$this->call->model('Faculty_model');

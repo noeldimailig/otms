@@ -54,11 +54,11 @@ class User extends Controller {
 				'lname' => $result['lname'],
 				'user_profile' => $result['profile'],
 				'user_type' => $result['user_type'],
-				'user_email' => $result['email'],
+				'user_email' => $result['email']
 			);
 
 			$type = $result['user_type'];
-			if($type == "Teacher"){
+			if($type == "Faculty"){
 				$this->session->set_userdata($userdata);
 				$msg['msg'] = "Logged in successful.";
 				$msg['error'] = false;
@@ -276,9 +276,10 @@ class User extends Controller {
 					$_SESSION['username'] = $signin['fname'] . ' ' . $signin['lname'];
 					$_SESSION['user_id'] = $signin['user_id'];
 				}
-				else
-					$_SESSION['username'] = $signin['username'];				
-
+				else{
+					$_SESSION['username'] = $signin['username'];		
+					$_SESSION['user_id'] = $signin['user_id'];		
+				}
 				$user_type = strtolower($signin['user_type']);
 
 				if($signin){
@@ -286,6 +287,84 @@ class User extends Controller {
 				}else {
 					redirect('user/login');
 				}
+			}
+		}
+	}
+
+	public function update_personal_details() {
+		$this->call->model('User_model');
+
+		$email = $this->io->post('p-details-email');
+		$fname = $this->io->post('fname');
+		$mname = $this->io->post('mname');
+		$lname = $this->io->post('lname');
+		$nameex = $this->io->post('nameex');
+
+		$region = $this->io->post('region_text');
+		$province = $this->io->post('province_text');
+		$city = $this->io->post('city_text');
+		$barangay = $this->io->post('barangay_text');
+		$contact = $this->io->post('contact');
+		$gender = $this->io->post('gender');
+		$bdate = $this->io->post('bdate');
+		
+		$address = $region . ',' . $province . ',' . $city . ',' . $barangay;
+
+		if($this->User_model->check_email($email)){
+			$result = $this->User_model->update_personal_details($email, $fname, $mname, $lname, $nameex, $address, $contact, $gender, $bdate);
+			
+			if($result){
+				$userdata = array(
+					'fname' => $fname,
+					'lname' => $lname
+				);
+				$this->session->set_userdata($userdata);
+				$msg['msg'] = "Personal details updated succesfully.";
+				$msg['error'] = false;
+				$msg['bdate'] = $bdate;
+				echo json_encode($msg);
+				exit;
+			}else{
+				$msg['msg'] = "Update failed. Please check all the information you provided!";
+				$msg['error'] = true;
+				echo json_encode($msg);
+				exit;
+			}
+		}
+	}
+
+	public function update_account_details() {
+		$this->call->model('User_model');
+
+		$email = $this->io->post('a-email');
+		$username = $this->io->post('uname');
+		$password = $this->io->post('password');
+		$salutation = $this->io->post('designation');
+		$position = $this->io->post('position');
+
+		$result = $this->User_model->check_email($email);
+		if($result){
+			if($password == "")
+				$password = $result['password'];
+			else $password = $this->auth->passwordhash($password);
+				
+			$update = $this->User_model->update_account_details($email, $password, $username, $salutation, $position);
+			
+			if($update){
+				$userdata = array(
+					'user_email' => $username
+				);
+				$this->session->unset_userdata($userdata);
+				$this->session->set_userdata($userdata);
+				$msg['msg'] = "Account details updated succesfully.";
+				$msg['error'] = false;
+				echo json_encode($msg);
+				exit;
+			}else{
+				$msg['msg'] = "Update failed. Please check all the information you provided!";
+				$msg['error'] = true;
+				echo json_encode($msg);
+				exit;
 			}
 		}
 	}

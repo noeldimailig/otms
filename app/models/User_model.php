@@ -13,8 +13,9 @@ class User_model extends Model {
     }
 
 	public function check_email($email) {
-        $result = $this->db->table('users')->select('email')->where('email', $email)->get();
-        if($result) return true;
+        $result = $this->db->table('users')->select('email, password')->where('email', $email)->get();
+        if($result) return $result;
+        else return false;
     }
 
     public function verify($email, $token) {
@@ -101,6 +102,42 @@ class User_model extends Model {
                         ->select('*')
                         ->where('user_type = ? and user_id = ?', [$type, $user_id])
                         ->get();
+    }
+
+    public function update_personal_details($email, $fname, $mname, $lname, $nameex, $address, $contact, $gender, $bdate) {
+        $data = [
+            'fname' => $fname,
+            'mname' => $mname,
+            'lname' => $lname,
+            'name_ex' => $nameex,
+            'address' => $address,
+            'contact' => $contact,
+            'gender' => $gender,
+            'bdate' => $bdate
+        ];
+
+        $result = $this->db->table('users')->update($data)->where('email' , $email)->exec();
+
+        if($result)
+            return true;
+        else
+            return false;    
+    }
+
+    public function update_account_details($email, $password, $username, $salutation, $position) {
+        $data = [
+            'username' => $username,
+            'password' => $password,
+            'designation' => $salutation,
+            'position' => $position
+        ];
+
+        $result = $this->db->table('users')->update($data)->where('email' , $email)->exec();
+
+        if($result)
+            return true;
+        else
+            return false;    
     }
 }
 ?>

@@ -33,10 +33,10 @@ var my_handlers = {
         barangay.prop('selectedIndex', 0);
 
         // filter & fill
-        var url = './../public/assets/js/ph-address-selector/province.json';
+        var url = 'http://localhost/otms/public/assets/js/ph-address-selector/province.json';
         $.getJSON(url, function(data) {
             var result = data.filter(function(value) {
-                return value.region_code == region_code;
+                return value.region_code == region_code.slice(0,2);
             });
 
             result.sort(function(a, b) {
@@ -44,7 +44,7 @@ var my_handlers = {
             });
 
             $.each(result, function(key, entry) {
-                dropdown.append($('<option></option>').attr('value', entry.province_code).text(entry.province_name));
+                dropdown.append($('<option></option>').attr('value', entry.province_code + ' - ' + entry.province_name).text(entry.province_name));
             })
 
         });
@@ -75,10 +75,10 @@ var my_handlers = {
         barangay.prop('selectedIndex', 0);
 
         // filter & fill
-        var url = './../public/assets/js/ph-address-selector/city.json';
+        var url = 'http://localhost/otms/public/assets/js/ph-address-selector/city.json';
         $.getJSON(url, function(data) {
             var result = data.filter(function(value) {
-                return value.province_code == province_code;
+                return value.province_code == province_code.slice(0,4);
             });
 
             result.sort(function(a, b) {
@@ -86,7 +86,7 @@ var my_handlers = {
             });
 
             $.each(result, function(key, entry) {
-                dropdown.append($('<option></option>').attr('value', entry.city_code).text(entry.city_name));
+                dropdown.append($('<option></option>').attr('value', entry.city_code + ' - ' + entry.city_name).text(entry.city_name));
             })
 
         });
@@ -110,10 +110,10 @@ var my_handlers = {
         dropdown.prop('selectedIndex', 0);
 
         // filter & Fill
-        var url = './../public/assets/js/ph-address-selector/barangay.json';
+        var url = 'http://localhost/otms/public/assets/js/ph-address-selector/barangay.json';
         $.getJSON(url, function(data) {
             var result = data.filter(function(value) {
-                return value.city_code == city_code;
+                return value.city_code == city_code.slice(0,6);
             });
 
             result.sort(function(a, b) {
@@ -121,7 +121,7 @@ var my_handlers = {
             });
 
             $.each(result, function(key, entry) {
-                dropdown.append($('<option></option>').attr('value', entry.brgy_code).text(entry.brgy_name));
+                dropdown.append($('<option></option>').attr('value', entry.brgy_code + ' - ' + entry.brgy_name).text(entry.brgy_name));
             })
 
         });
@@ -136,7 +136,7 @@ var my_handlers = {
 
 };
 
-
+let dropdown = $('#region');
 $(function() {
     // events
     $('#region').on('change', my_handlers.fill_provinces);
@@ -145,16 +145,27 @@ $(function() {
     $('#barangay').on('change', my_handlers.onchange_barangay);
 
     // load region
-    let dropdown = $('#region');
     dropdown.empty();
     dropdown.append('<option selected="true" disabled>Choose Region</option>');
     dropdown.prop('selectedIndex', 0);
-    const url = './../public/assets/js/ph-address-selector/region.json';
+
+    const url = 'http://localhost/otms/public/assets/js/ph-address-selector/region.json';
     // Populate dropdown with list of regions
     $.getJSON(url, function(data) {
         $.each(data, function(key, entry) {
-            dropdown.append($('<option></option>').attr('value', entry.region_code).text(entry.region_name));
+            dropdown.append($('<option></option>').attr('value', entry.region_code + ' - ' + entry.region_name).text(entry.region_name));
         })
     });
-
 });
+
+// $(document).ready(() => {
+//     currentLocation = window.location.pathname;
+//     removeID = currentLocation.slice(0,24)
+
+//     setInterval(()=> {
+//         length = document.getElementById('region').length
+//         if(length == 19 && removeID === '/otms/faculty/myprofile/') {
+//             dropdown.prop('selectedIndex', 1);
+//         }
+//     }, 3000);
+// });

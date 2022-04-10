@@ -22,9 +22,6 @@
                     </a>
                     <ul>
                         <li><a href="<?php echo site_url("student/myprofile/". encrypt_id($_SESSION['user_id'])); ?>">My Profile</a></li>
-                        <!-- <li><a href="<?php //echo site_url("nav/mydocuments/". encrypt_id($_SESSION['user_id'])); ?>">My Documents</a></li>
-                        <li><a href="<?php //echo site_url('nav/mycitations/'. encrypt_id($_SESSION['user_id'])); ?>">Saved Citations</a></li>
-                        <li><a href="<?php //echo site_url('nav/mybookmarks/'. encrypt_id($_SESSION['user_id'])); ?>">Bookmarked Documents</a></li> -->
                         <li><a href="<?php echo site_url('user/logout'); ?>">Log Out</a></li>  
                     </ul>
                 </li>

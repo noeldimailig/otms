@@ -19,7 +19,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             <div class="px-5 mx-5" id="main">
                 <div class="row mt-5">
                     <div class="col-lg-3 col-md-4 bg-white p-3">
-                        <div class="card mb-5 bg-white border border-light">
+                        <div class="card mb-5 bg-white border border-light p-3">
                             <div class="card-body">
                                 <div class="text-center">
                                     <img class="border border-5 border-success rounded-circle" style="width: 150px; height: 150px;" src="<?= check_dp($data['faculty']['profile']);?>" alt="">
@@ -30,7 +30,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                                     <div class="d-flex flex-row align-items-between justify-content-between">
                                         <div class="d-flex flex-row align-items-center justify-content-center">
                                             <i class="fa-solid fa-chalkboard-user fs-4 mb-2"></i>
-                                            <h6 class="text-center px-2">Total Class</h6>
+                                            <h6 class="text-center px-2">Class</h6>
                                         </div>
                                         <span class="fs-4"><?= $data['total_class']['total']; ?></span>
                                     </div>
@@ -39,12 +39,12 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                                     <div class="d-flex flex-row align-items-between justify-content-between">
                                         <div class="d-flex flex-row align-items-center justify-content-center">
                                             <i class="fa-solid fa-users fs-4 mb-2"></i> 
-                                            <h6 class="text-center px-2">Total Student</h6>
+                                            <h6 class="text-center px-2">Student</h6>
                                         </div>
                                         <span class="fs-4"><?= $data['total_students']['total']; ?></span>
                                     </div>
                                 </div>
-                                <div class="text-center"><a href="my-profile.html" title="">My Profile</a></div>
+                                <div class="text-center"><a href="<?= site_url('faculty/myprofile/'. encrypt_id($data['faculty']['user_id'])); ?>" title="">My Profile</a></div>
                             </div>
                         </div>
 

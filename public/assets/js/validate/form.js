@@ -1,7 +1,4 @@
 $().ready(function() {
-    var today = moment().format('YYYY-MM-DD');
-    $('#bdate').val(today);
-
     // alpha
     jQuery.validator.addMethod("numeric", function(value, element) {
         return this.optional(element) || /^[0-9]+$/i.test(value);
@@ -284,6 +281,137 @@ $().ready(function() {
             }
         },
     });
+    $("#a-details").validate({
+        rules: {
+            uname: {
+                maxlength: 20,
+                minlength: 5,
+            },
+            email: {
+                required: true,
+                maxlength: 100,
+                email: true
+            },
+            password: {
+                maxlength: 100,
+                minlength: 8,
+            },
+            confirm_password: {
+                maxlength: 100,
+                minlength: 8,
+                equalTo: "#password"
+            }
+        },
+        messages: {
+            uname: {
+                maxlength: "You have reach the maximum input value.",
+                minlength: "Please enter more than 4 characters.",
+            },
+            email: {
+                required: "This field is required.",
+                maxlength: "You have reach the maximum input value.",
+                email: "Please input a valid email."
+            },
+            password: {
+                maxlength: "You have reach the maximum input value.",
+                minlength: "Please enter at least 8 characters.",
+            },
+            confirm_password: {
+                maxlength: "You have reach the maximum input value.",
+                minlength: "Please enter at least 8 characters.",
+                equalTo: "Password do not match."
+            }
+        },
+    });
+
+    $("#p-details").validate({
+        rules: {
+            fname: {
+                required: true,
+                maxlength: 50,
+                minlength: 2,
+                alpha_space: true
+            },
+            mname: {
+                maxlength: 50,
+                minlength: 2,
+                alpha_space: true
+            },
+            lname: {
+                required: true,
+                maxlength: 50,
+                minlength: 2,
+                alpha_space: true
+            },
+            region: {
+                required: true
+            },
+            province: {
+                required: true
+            },
+            city: {
+                required: true
+            },
+            barangay: {
+                required: true
+            },
+            contact: {
+                required: true,
+                maxlength: 11,
+                minlength: 11,
+                digits: true
+            },
+            gender: {
+                required: true
+            },
+            bdate: {
+                required: true
+            }
+        },
+        messages: {
+            fname: {
+                required: "This field is required.",
+                maxlength: "You have reach the maximum input value.",
+                minlength: "Please enter more than 2 characters.",
+                alpha_space: "Please input letters, and spaces only."
+            },
+            mname: {
+                maxlength: "You have reach the maximum input value.",
+                minlength: "Please enter more than 2 characters.",
+                alpha_space: "Please input letters, and spaces only."
+            },
+            lname: {
+                required: "This field is required.",
+                maxlength: "You have reach the maximum input value.",
+                minlength: "Please enter more than 2 characters.",
+                alpha_space: "Please input letters, and spaces only."
+            },
+            region: {
+                required: "This field is required."
+            },
+            province: {
+                required: "This field is required."
+            },
+            city: {
+                required: "This field is required."
+            },
+            barangay: {
+                required: "This field is required."
+            },
+            contact: {
+                required: "This field is required.",
+                maxlength: "You have reach the maximum input value.",
+                digits: "Please input numbers only.",
+                minlength: "Please enter your 11 digit contact no.",
+            },
+            gender: {
+                required: "This field is required.",
+            },
+            bdate: {
+                required: "This field is required."
+            }
+        },
+    });
 });
 
 $('#signup-validate').submit(function(e) {
@@ -299,7 +427,7 @@ $('#signup-validate').submit(function(e) {
             var res = JSON.parse(response);
             if(res.error == false) {
               $('#message').show();
-                alertSuccess(res.msg);
+                alertSuccess('message', res.msg);
                 setTimeout(function(){
                   $('#message-content').remove();
                   $('#message').hide();
@@ -323,7 +451,69 @@ $('#signup-validate').submit(function(e) {
                 $('#confirm_password').val("");
             } else {
               $('#message').show();
-              alertError(res.msg);
+              alertError('message',res.msg);
+              setTimeout(function(){
+                $('#message-content').remove();
+                $('#message').hide();
+              }, 3000);
+            }
+        }
+    });
+});
+
+$('#p-details').submit(function(e) {
+    e.preventDefault();
+
+    var form = $(this);
+    var url = form.attr('action');
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: form.serialize(),
+        success: function(response) {
+            var res = JSON.parse(response);
+            if(res.error == false) {
+              $('#p-message').show();
+                alertSuccess('p-message', res.msg);
+                setTimeout(function(){
+                  $('#message-content').remove();
+                  $('#message').hide();
+                  location.reload();
+                }, 6000);
+            } else {
+              $('#p-message').show();
+              alertError('p-message', res.msg);
+              setTimeout(function(){
+                $('#message-content').remove();
+                $('#message').hide();
+              }, 3000);
+            }
+        }
+    });
+});
+
+$('#a-details').submit(function(e) {
+    e.preventDefault();
+
+    var form = $(this);
+    var url = form.attr('action');
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: form.serialize(),
+        success: function(response) {
+            var res = JSON.parse(response);
+            if(res.error == false) {
+              $('#a-message').show();
+                alertSuccess('a-message', res.msg);
+                setTimeout(function(){
+                  $('#message-content').remove();
+                  $('#message').hide();
+                  location.reload();
+                }, 6000);
+            } else {
+              $('#a-message').show();
+              alertError('a-message', res.msg);
               setTimeout(function(){
                 $('#message-content').remove();
                 $('#message').hide();
@@ -345,7 +535,7 @@ $('#verify-validate').submit(function(e) {
             var res = JSON.parse(response);
             if(res.error == false) {
             $('#message').show();
-            alertSuccess(res.msg);
+            alertSuccess('message', res.msg);
             setTimeout(function(){
                 $('#message-content').remove();
                 $('#message').hide();
@@ -356,7 +546,7 @@ $('#verify-validate').submit(function(e) {
             $('#verify_code').val("");
             } else {
             $('#message').show();
-            alertError(res.msg);
+            alertError('message', res.msg);
             setTimeout(function(){
                 $('#message-content').remove();
                 $('#message').hide();
@@ -378,7 +568,7 @@ $('#forgot-validate').submit(function(e) {
             var res = JSON.parse(response);
             if(res.error == false) {
             $('#message').show();
-            alertSuccess(res.msg);
+            alertSuccess('message', res.msg);
             setTimeout(function(){
                 $('#message-content').remove();
                 $('#message').hide();
@@ -390,7 +580,7 @@ $('#forgot-validate').submit(function(e) {
             $('#confirm_password').val("");
             } else {
             $('#message').show();
-            alertError(res.msg);
+            alertError('message', res.msg);
             setTimeout(function(){
                 $('#message-content').remove();
                 $('#message').hide();
@@ -412,12 +602,12 @@ $('#signin-validate').submit(function(e) {
             var res = JSON.parse(response);
             if(res.error == false) {
             $('#message').show();
-            alertSuccess(res.msg);
+            alertSuccess('message', res.msg);
             setTimeout(function(){
                 $('#message-content').remove();
                 $('#message').hide();
 
-                if(res.role == "Teacher")
+                if(res.role == "Faculty")
                 location.replace('http://localhost/otms/faculty/index');
                 else if(res.role == "Staff")
                 location.replace('http://localhost/otms/staff/index');
@@ -428,7 +618,7 @@ $('#signin-validate').submit(function(e) {
             $('#password').val("");
             } else {
             $('#message').show();
-            alertError(res.msg);
+            alertError('message', res.msg);
             setTimeout(function(){
                 $('#message-content').remove();
                 $('#message').hide();
@@ -437,6 +627,8 @@ $('#signin-validate').submit(function(e) {
         }
     });
 });
+
+
 
 (function () {
     'use strict'
@@ -469,8 +661,8 @@ $('#signin-validate').submit(function(e) {
     }
 }
 
-function alertSuccess(message) {
-    $('#message').append(
+function alertSuccess(form, message) {
+    $('#'+form).append(
       '<div id="message-content">' +
         '<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">' +
           '<symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">' +
@@ -484,8 +676,8 @@ function alertSuccess(message) {
       '</div>');
   }
   
-  function alertError(message) {
-    $('#message').append(
+  function alertError(form, message) {
+    $('#'+form).append(
       '<div id="message-content">' +
         '<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">' +
           '<symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">' +
