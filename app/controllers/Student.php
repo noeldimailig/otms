@@ -63,5 +63,22 @@ class Student extends Controller {
             exit;
         }
 	}
+	// public function classes($user_id)
+	// {
+	// 	$this->call->model('Class_model');
+
+	// 	$results = $this->Class_model->get_active_classes(decrypt_id($user_id));
+
+	// 	$data = [];
+	// 	foreach($results as $result) {
+	// 		$counts = $this->Class_model->count_students($result['class_code']);
+	// 		foreach($counts as $count){
+	// 			$result['count'] = $count;
+	// 		}
+	// 		array_push($data, (array)$result);
+	// 	}
+
+	// 	$this->call->view('student/classes', $data);
+	// }
 }
 ?>

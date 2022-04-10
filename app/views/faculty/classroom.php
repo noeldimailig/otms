@@ -89,66 +89,134 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-8 mt-3">
-                            <div class="d-flex">
-                                <div class="d-flex flex-row justify-content-between align-items-center">
-                                    <img class="border border-3 border-success rounded-circle" style="width: 50px; height: 50px;" src="<?= check_dp($data['faculty']['profile']); ?>" alt="">
+                        <div class="bg-white border border-light p-3 mt-3">
+                            <div class="d-flex justify-content-between p-3 py-2 pb-0 mb-2 border-bottom border-secondary bg-white">
+                                <p>Announcements</p>
+                                <div class="pt-1">
+                                    <div class="btn-group pull-right" role="group" aria-label="Basic mixed styles example" style="">
+                                        <i class="fas fa-bullhorn fs-1" data-bs-toggle="modal" data-bs-target="#ModalAnnouncement"></i>
+                                        <i class="fas fa-calendar-plus fs-1" data-bs-toggle="modal" data-bs-target="#ModalProject" ></i>
+                                    </div>
                                 </div>
                             </div>
+                            <!-- Modal Announcement -->
+                                <div class="modal fade" id="ModalAnnouncement" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Announcement</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="<?php echo site_url('classes/create_ann'); ?>" method="post">
+                                                    <div class="col-md-12 mb-2">
+                                                        <input type="hidden" class="form-control" name="id" id="id" value="<?= encrypt_id($_SESSION['user_id']); ?>">
+                                                        <label for="title" class="form-label">Title</label>
+                                                        <input type="text" class="form-control form-control-sm" name="title" id="title" placeholder="" maxlength="255" size="255" data-toggle="tooltip" data-placement="right" title="Title" required>
+                                                    </div>
+                                                    <div class="col-md-12 mb-2">
+                                                        <label for="content" class="form-label">Content</label>
+                                                        <textarea name="content" id="" name="content" id="content" class="form-control form-control-sm" cols="30" rows="5"></textarea>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <input type="submit" class="btn btn-success" name="submit" id="submit">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal Project -->
+                                <div class="modal fade" id="ModalProject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Activity</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="" method="post">
+                                                    <div class="col-md-12 mb-2">
+                                                        <label for="Title" class="form-label">Title</label>
+                                                        <input type="text" class="form-control form-control-sm" name="Title" id="Title" placeholder="" maxlength="255" size="255" data-toggle="tooltip" data-placement="right" title="Title" required>
+                                                    </div>
+                                                    <div class="col-md-12 mb-2">
+                                                        <label for="Description" class="form-label">Description*</label>
+                                                        <textarea name="Description" id="" class="form-control form-control-sm" cols="30" rows="5"></textarea>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-primary">Save</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php foreach($data['announcement'] as $announce) : ?>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex flex-row justify-content">
+                                        <img class="border border-3 border-success rounded-circle" style="width: 50px; height: 50px;" src="<?= check_dp($data['faculty']['profile']); ?>" alt="">
+                                    </div>
+                                    <div class="" >
+                                        <h4 class="mb-0"><?= $data['faculty']['fname'] .' '. $data['faculty']['lname']; ?></h4>
+                                        <span class="text-mute mt-0"> <i class="fa fa-clock-o"></i><?= $announce['date_posted']; ?></span>
+                                    </div>
+                                    <br>
+                                    <p><?= $announce['content']; ?></p>
+                                    <i class="fa fa-comments ms-3"></i> <span>Comments</span> 500 
+                                </a>
+                            </div>
+                            <?php endforeach ?>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex flex-row justify-content-between align-items-center">
+                                        <img class="border border-3 border-success rounded-circle" style="width: 50px; height: 50px;" src="<?= check_dp($data['faculty']['profile']); ?>" alt="">
+                                    </div>
+                                    <div class="" style="">
+                                        <h4 class="mb-0">Noel Dimailig</h4>
+                                        <span class="text-mute mt-0"> <i class="fa fa-clock-o"></i> 30 mins ago</span>
+                                    </div>
+                                    <br>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Faucibus purus in massa tempor nec feugiat nisl pretium fusce. A erat nam at lectus urna duis convallis. Amet mattis vulputate enim nulla aliquet. Quam pellentesque nec nam aliquam sem et. Congue quisque egestas diam in arcu cursus euismod. Elementum sagittis vitae et leo duis ut diam quam.</p>
+                                    <i class="fa fa-comments ms-3"></i> <span>Comments</span> 500
+                                </a>
+                            </div>
                         </div>
+
                         <div class="col-lg-3 col-md-4 bg-white mt-3 mb-5">
                             <div class="bg-white border border-light p-3">
                                 <div class="d-flex justify-content-between p-3 py-2 pb-0 mb-2 border-bottom border-secondary bg-white">
-                                    <p>Schedule</p>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    <p>Class Code</p>
+                                        
                                 </div>
                                 <div class="list-group">
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between align-items-center">
-                                            <div class="bg-info rounded-circle"><i class="fa-solid fa-file fs-5 p-3 text-white"></i></div>
-                                            <div class="px-4">
-                                                <small class="text-secondary">3 days ago</small>
-                                                <p class="mb-1 fs-6">Some placeholder content in a paragraph.</p>
-                                            </div>
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <div class="px-4">
+                                            <label id="Code" value="ksksskksksks" >ksksskksksks</label>
                                         </div>
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between align-items-center">
-                                            <div class="bg-info rounded-circle"><i class="fa-solid fa-file fs-5 p-3 text-white"></i></div>
-                                            <div class="px-4">
-                                                <small class="text-secondary">3 days ago</small>
-                                                <p class="mb-1 fs-6">Some placeholder content in a paragraph.</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="bg-white border border-light p-3 mt-5">
-                                <div class="d-flex justify-content-between p-3 py-2 pb-0 mb-2 border-bottom border-secondary bg-white">
-                                    <p>Notifications</p>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </div>
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between align-items-center">
-                                            <div class="bg-info rounded-circle"><i class="fa-solid fa-file fs-5 p-3 text-white"></i></div>
-                                            <div class="px-4">
-                                                <small class="text-secondary">3 days ago</small>
-                                                <p class="mb-1 fs-6">Some placeholder content in a paragraph.</p>
-                                            </div>
-                                        </div>
-                                    </a>
+                                        <a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" onclick="myFunction()">Copy</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>   
             </div>  
         </main>
         <!-- Modal -->
-        <div class="modal fade" id="add-class-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+       <!-- <div class="modal fade" id="add-class-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="<?php echo site_url('classes/create'); ?>" method="post" id="create-class">
+                    <form action="<?php //echo site_url('classes/create'); ?>" method="post" id="create-class">
                         <div class="modal-header">
                             <h5 class="modal-title" id="update">Create Class</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -157,7 +225,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                             <div id="message"></div>
                             <div class="form-group mb-1">
                                 <label for="code">Course Code</label>
-                                <input type="hidden" class="form-control" name="id" id="id" value="<?= encrypt_id($_SESSION['user_id']); ?>">
+                                <input type="hidden" class="form-control" name="id" id="id" value="<?php// encrypt_id($_SESSION['user_id']); ?>">
                                 <input type="text" class="form-control" name="code" id="code" placeholder="Course Code">
                             </div>
                             <div class="form-group mb-1">
@@ -218,8 +286,24 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                     </form>
                 </div>
             </div>
-        </div>
+        </div> -->
         <?php include('default/footer.php'); ?>
         <?= load_js(array('assets/faculty/classes')); ?>
+        <script>
+        function myFunction() {
+            /* Get the text field */
+            var copyText = document.getElementById("Code");
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+            /* Copy the text inside the text field */
+            navigator.clipboard.writeText(copyText.value);
+
+            /* Alert the copied text */
+            alert("Copied the text: " + copyText.value);
+            }
+        </script>
     </body> 
 </html> 
