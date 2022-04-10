@@ -98,6 +98,28 @@ class Class_model extends Model {
             return true;
         else
             return false;    
+	}
+	public function create_ann($cou_ann_id, $title, $content,$date_posted){
+		$data = [
+			'cou_ann_id' => $cou_ann_id,
+			'title' => $title,
+			'content' => $content,
+			'date_posted' => $date_posted,
+			'ann_status' => 1
+		];
+
+		$result = $this->db->table('course_announcement')->insert($data)->exec();
+
+		if($result)
+			return true;
+		else
+			return false;
+	}
+	public function post_ann($cou_ann_id) {
+        return $this->db->table('course_announcement')
+						->select('cou_ann_id', 'title', 'content', 'date_posted')
+						->where('cou_ann_id', $cou_ann_id)
+						->get();
     }
 }
 ?>

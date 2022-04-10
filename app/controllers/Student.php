@@ -12,9 +12,11 @@ class Student extends Controller {
 	{
 		$user_id = $_SESSION['user_id'];
 		$this->call->model('User_model');
+		$this->call->model('Class_model');
 
 		//$data['total_class'] = $this->Class_model->count_classes($user_id);
 		//$data['total_students'] = $this->Class_model->count_total_students($user_id);
+		//$data['accepted'] = $this->Class_model->get_students($class_code, 1);
 		$data['student'] = $this->User_model->get_user('Student', $user_id);
 		$this->call->view('student/index', $data);
 	}
@@ -61,5 +63,22 @@ class Student extends Controller {
             exit;
         }
 	}
+	// public function classes($user_id)
+	// {
+	// 	$this->call->model('Class_model');
+
+	// 	$results = $this->Class_model->get_active_classes(decrypt_id($user_id));
+
+	// 	$data = [];
+	// 	foreach($results as $result) {
+	// 		$counts = $this->Class_model->count_students($result['class_code']);
+	// 		foreach($counts as $count){
+	// 			$result['count'] = $count;
+	// 		}
+	// 		array_push($data, (array)$result);
+	// 	}
+
+	// 	$this->call->view('student/classes', $data);
+	// }
 }
 ?>

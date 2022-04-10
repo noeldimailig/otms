@@ -37,9 +37,9 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                                 <?php $student_id = $class['student_id']; ?>
                                 <div class="col">
                                     <div class="card" style="width: 18rem;">
-                                        <img src="<?php echo BASE_URL . PUBLIC_DIR.'/assets/img/'.$class['photo']; ?>" class="card-img-top" alt="Class Photo">
+                                        <img src="<?php echo BASE_URL . PUBLIC_DIR.'/assets/img/'.$class['photo']; ?>"  class="card-img-top" alt="Class Photo">
                                         <div class="card-body">
-                                            <h5 class="card-title"><?= $class['room']; ?></h5>
+                                            <h5 class="card-title"><a href="<?= site_url('student_classes/open/'. encrypt_id($class['student_id']) . '/' . $class['class_code']); ?>"><?= $class['room']; ?></a></h5>
                                             <p class="card-text"><?= $class['schedule']; ?></p>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <p class="card-text fs-6 mb-0 text-scondary">Classmates</p>

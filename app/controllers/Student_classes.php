@@ -2,7 +2,7 @@
 <?php
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
-class Classes extends Controller {
+class Student_classes extends Controller {
 	public function __construct()
 	{
 		parent::__construct();
@@ -13,14 +13,13 @@ class Classes extends Controller {
 		$this->call->model('Class_model');
 		$this->call->model('User_model');
 
-		$data['announcement'] = $this->Class_model->post_ann( decrypt_id($user_id));
 		$data['class'] = $this->Class_model->get_class($class_code, decrypt_id($user_id));
-		$data['faculty'] = $this->User_model->get_user('Faculty', decrypt_id($user_id));
+		$data['student'] = $this->User_model->get_user('Student', decrypt_id($user_id));
 		$data['accepted'] = $this->Class_model->get_students($class_code, 1);
-		$data['joining'] = $this->Class_model->get_students($class_code, 0);
 
-		$this->call->view('faculty/classroom', $data);
+		$this->call->view('student/classroom', $data);
 	}
+	
 
 	public function students($user_id, $class_code)
 	{
@@ -99,29 +98,6 @@ class Classes extends Controller {
             echo json_encode($msg);
             exit;
         }
-	}
-	public function create_ann()
-	{
-		$this->call->model('Class_model');
-
-		$cou_ann_id = decrypt_id($this->io->post('id'));
-		$title = $this->io->post('title');
-		$content = $this->io->post('content');
-		$date_posted = $this->io->post('date_posted');
-
-		$result = $this->Class_model->create_ann($cou_ann_id, $title, $content, $date_posted);
-
-		if($result) {
-            $msg['ann_status'] = true;
-            $msg['msg'] = "Announcement creation successful";
-            echo json_encode($msg);
-            exit;
-        } else{
-            $msg['ann_status'] = false;
-            $msg['msg'] = "Announcement creation failed. Please try again.";
-            echo json_encode($msg);
-            exit;
-		}
 	}
 }
 ?>
